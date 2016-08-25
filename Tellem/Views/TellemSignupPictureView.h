@@ -1,5 +1,5 @@
 //
-//  TellemSignupInterestsView.h
+// TellemSignupPictureView.h
 //  Tellem
 //
 //  Created by Ed Bayudan on 1/28/15.
@@ -8,7 +8,7 @@
 
 #import "TPKeyboardAvoidingScrollView.h"
 
-@interface TellemSignupInterestsView : UIView<UITextFieldDelegate>
+@interface TellemSignupPictureView : UIView<UITextFieldDelegate>
 
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *inputBackgroundImageView;

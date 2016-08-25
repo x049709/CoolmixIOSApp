@@ -20,7 +20,7 @@
 @synthesize removeViewButton;
 @synthesize inputUserName, inputFirstName, inputLastName;
 @synthesize inputPassword,retypePassword;
-@synthesize continueButton;
+@synthesize continueButton,skipButton;
 @synthesize alreadyButton;
 @synthesize forgotPasswordButton;
 @synthesize sportsButton, newsButton, musicButton;
@@ -76,9 +76,14 @@
         artButton = [self createButtonWithFrame:CGRectMake(180, 130, 40, 15) andTitle:@"ART +"];
         gamingButton = [self createButtonWithFrame:CGRectMake(20, 150, 60, 15) andTitle:@"GAMING +"];
         foodButton = [self createButtonWithFrame:CGRectMake(90, 150, 50, 15) andTitle:@"FOOD +"];
+        fashionButton = [self createButtonWithFrame:CGRectMake(80, 170, 60, 15) andTitle:@"FASHION +"];
+        outdoorsadventureButton = [self createButtonWithFrame:CGRectMake(20, 170, 150, 15) andTitle:@"OUTDOORS & ADVENTURE +"];
+        
+        continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
         fashionButton = [self createButtonWithFrame:CGRectMake(20, 170, 60, 15) andTitle:@"FASHION +"];
         outdoorsadventureButton = [self createButtonWithFrame:CGRectMake(90, 170, 150, 15) andTitle:@"OUTDOORS & ADVENTURE +"];
-
+        
         continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 70, scrollView.frame.size.height - 40, 60, 25)];
         [continueButton setBackgroundColor:[UIColor whiteColor]];
@@ -86,6 +91,20 @@
         [continueButton setTitle:@"CONTINUE" forState:UIControlStateNormal];
         [continueButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
         [continueButton setSelected:NO];
+        [continueButton setEnabled:FALSE];
+        continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [scrollView addSubview:continueButton];
+        
+        skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [skipButton setFrame:CGRectMake(20, scrollView.frame.size.height - 40, 60, 25)];
+        [skipButton setBackgroundColor:[UIColor whiteColor]];
+        [skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [skipButton setTitle:@"SKIP" forState:UIControlStateNormal];
+        [skipButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
+        [skipButton setSelected:NO];
+        skipButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [scrollView addSubview:skipButton];
+        
         continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [scrollView addSubview:continueButton];
         
@@ -139,11 +158,12 @@
     
     if (continueButton.tag>0) {
         [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [continueButton setEnabled:TRUE];
     }
     else {
         [continueButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [continueButton setEnabled:FALSE];
     }
-    
 }
 
 
@@ -248,6 +268,11 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 
 @end

@@ -30,7 +30,7 @@
 @implementation LoginViewController
 
 @synthesize tabBarController,titleLbl,titlImg,textfielImg;
-@synthesize isLogin,tellemLoginView,tellemSignupView,tellemSignupInterestsView,resetPasswordView;
+@synthesize isLogin,tellemLoginView,tellemSignupView,tellemSignupInterestsView,tellemSignupPictureView,resetPasswordView;
 @synthesize user_id;
 @synthesize mixSigninButton,shopSigninButton;
 
@@ -50,7 +50,7 @@
     [super viewDidLoad];
     self.navigationItem.title=@"LOGIN";
     [self.navigationController.navigationBar
-    setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
                               NSFontAttributeName:[UIFont fontWithName:kFontNormal size:22.0] }];
     NSString *userId=[[PFUser currentUser] valueForKey:@"username"];
     NSString *userName=[[PFUser currentUser] valueForKey:@"displayName"];
@@ -68,7 +68,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     //MWLogDebug(@"\nLoginViewController viewWillAppear: Started.");
-   [super viewWillAppear:YES];
+    [super viewWillAppear:YES];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"landingbackground.png"]];
 }
 
@@ -89,13 +89,13 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-	[self.view.window addSubview:ApplicationDelegate.hudd];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-	 [ApplicationDelegate.hudd hide:YES];
+    [ApplicationDelegate.hudd hide:YES];
 }
 
 - (void)removeView:(id)sender {
@@ -133,7 +133,7 @@
     [PFInstallation currentInstallation][@"userId"] = resetPasswordView.inputCelllNumber.text;
     [PFInstallation currentInstallation][@"accountType"] = @"Normal";
     [PFInstallation currentInstallation].channels = @[@"Global"];
-    [[PFInstallation currentInstallation] saveInBackground];    
+    [[PFInstallation currentInstallation] saveInBackground];
     [TellemUtility sendForgottenPasswordToUser:resetPasswordView.inputCelllNumber.text];
 }
 
@@ -153,7 +153,7 @@
     }
     
     [PFUser logInWithUsernameInBackground:tellemLoginView.inputUserName.text password:tellemLoginView.inputPassword.text
-        block:^(PFUser *user, NSError *error)
+                                    block:^(PFUser *user, NSError *error)
      {
          if(error!=nil)
          {
@@ -169,13 +169,13 @@
                  double delayInSeconds = 0.1;
                  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                  dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-                    {
-                        [self dismissViewControllerAnimated:YES completion:Nil];
-                        [(AppDelegate*)[[UIApplication sharedApplication] delegate] presentTabBarController];
-                        [ApplicationDelegate.hudd hide:YES];
-                        RestClient *restClient = [[RestClient alloc] init];
-                        [restClient postToMix];
-                });
+                                {
+                                    [self dismissViewControllerAnimated:YES completion:Nil];
+                                    [(AppDelegate*)[[UIApplication sharedApplication] delegate] presentTabBarController];
+                                    [ApplicationDelegate.hudd hide:YES];
+                                    RestClient *restClient = [[RestClient alloc] init];
+                                    [restClient postToMix];
+                                });
              }
              else
              {
@@ -209,7 +209,7 @@
                  [user setObject:@"Guest" forKey:@"displayName"];
                  if ([self isEmailValid:tellemLoginView.inputUserName.text]) {
                      user.email = tellemLoginView.inputUserName.text;
-                 }                 
+                 }
                  UIImage *defaultImg=[UIImage imageNamed:@"user.png"];
                  NSData *imageDataMed= UIImageJPEGRepresentation(defaultImg, 0.5);
                  PFFile *imageFileMed = [PFFile fileWithName:@"user.png" data:imageDataMed];
@@ -223,7 +223,7 @@
                  PFFile *imageFileSmall= [PFFile fileWithName:@"user.png"  data:imageDataSmall];
                  [user setObject:imageFileSmall forKey:kPAPUserProfilePicSmallKey];
                  //[user save];
-
+                 
                  double delayInSeconds = 0.1;
                  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                  dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
@@ -261,16 +261,14 @@
     [tellemSignupView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupView.signinButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupView.registerButton addTarget:self action:@selector(showSignupInterests:) forControlEvents:UIControlEventTouchUpInside];
-    //[tellemSignupView.registerButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
     [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];
     [self.view addSubview:tellemSignupView];
     [ApplicationDelegate.hudd hide:YES];
-
+    
 }
 
 - (void)showSignupInterests:(id)sender {
-    
     tellemSignupInterestsView=[[TellemSignupInterestsView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
     [tellemSignupInterestsView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupInterestsView.continueButton addTarget:self action:@selector(showSignupProfilePicture:) forControlEvents:UIControlEventTouchUpInside];
@@ -284,18 +282,23 @@
 
 - (void)showSignupProfilePicture:(id)sender {
     
-    NSString * msgText = @"Yo man";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Coolmix" message:msgText delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    
-}
-
-- (void)registerNewUser:(id)sender {
-    
     if (![self areInputsValid:tellemSignupView.inputUserName.text andPassword:tellemSignupView.inputPassword.text])
     {
         return;
     }
+    
+    tellemSignupPictureView=[[TellemSignupPictureView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
+    [tellemSignupPictureView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureView.continueButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureView.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
+    [ApplicationDelegate.hudd show:YES];
+    [self.view addSubview:tellemSignupPictureView];
+    [ApplicationDelegate.hudd hide:YES];
+    
+}
+
+- (void)registerNewUser:(id)sender {
     
     [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];
@@ -443,6 +446,7 @@
     [textField resignFirstResponder];
     return YES;
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
