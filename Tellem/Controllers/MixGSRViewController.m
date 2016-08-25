@@ -209,7 +209,7 @@
     NSString *age = [item objectForKey:@"age"];
     NSString *email = [item objectForKey:@"email"];
     NSString *name = [item objectForKey:@"name"];
-    NSString *msg = [NSString stringWithFormat: @" HELLO %@ %@ %@ %@", id, age, email, name];
+    NSString *msg = [NSString stringWithFormat: @" HELLOOOO from GSR %@ %@ %@ %@", id, age, email, name];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Coolmix" message:msg delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [alert show];
 
