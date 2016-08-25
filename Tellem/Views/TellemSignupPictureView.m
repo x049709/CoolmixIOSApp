@@ -63,8 +63,8 @@
         UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 15)];
         [interestLabel setTextColor:[UIColor blackColor]];
         [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
-        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
-        interestLabel.text = @"Add your unique interests";
+        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 10.0f]];
+        interestLabel.text = @"Have a favorite selfie? Add it now!";
         [scrollView addSubview:interestLabel];
         
         continueButton = [UIButton buttonWithType:UIButtonTypeCustom];

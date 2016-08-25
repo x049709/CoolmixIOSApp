@@ -269,6 +269,11 @@
 }
 
 - (void)showSignupInterests:(id)sender {
+    if (![self areInputsValid:tellemSignupView.inputUserName.text andPassword:tellemSignupView.inputPassword.text])
+    {
+        return;
+    }
+    
     tellemSignupInterestsView=[[TellemSignupInterestsView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
     [tellemSignupInterestsView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupInterestsView.continueButton addTarget:self action:@selector(showSignupProfilePicture:) forControlEvents:UIControlEventTouchUpInside];
@@ -281,11 +286,6 @@
 }
 
 - (void)showSignupProfilePicture:(id)sender {
-    
-    if (![self areInputsValid:tellemSignupView.inputUserName.text andPassword:tellemSignupView.inputPassword.text])
-    {
-        return;
-    }
     
     tellemSignupPictureView=[[TellemSignupPictureView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
     [tellemSignupPictureView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];

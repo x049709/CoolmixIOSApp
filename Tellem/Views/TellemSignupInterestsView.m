@@ -76,13 +76,8 @@
         artButton = [self createButtonWithFrame:CGRectMake(180, 130, 40, 15) andTitle:@"ART +"];
         gamingButton = [self createButtonWithFrame:CGRectMake(20, 150, 60, 15) andTitle:@"GAMING +"];
         foodButton = [self createButtonWithFrame:CGRectMake(90, 150, 50, 15) andTitle:@"FOOD +"];
-        fashionButton = [self createButtonWithFrame:CGRectMake(80, 170, 60, 15) andTitle:@"FASHION +"];
+        fashionButton = [self createButtonWithFrame:CGRectMake(150, 150, 60, 15) andTitle:@"FASHION +"];
         outdoorsadventureButton = [self createButtonWithFrame:CGRectMake(20, 170, 150, 15) andTitle:@"OUTDOORS & ADVENTURE +"];
-        
-        continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
-        fashionButton = [self createButtonWithFrame:CGRectMake(20, 170, 60, 15) andTitle:@"FASHION +"];
-        outdoorsadventureButton = [self createButtonWithFrame:CGRectMake(90, 170, 150, 15) andTitle:@"OUTDOORS & ADVENTURE +"];
         
         continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 70, scrollView.frame.size.height - 40, 60, 25)];
