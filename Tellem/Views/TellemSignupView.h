@@ -23,7 +23,5 @@
 @property (nonatomic, strong) UIButton *guestButton;
 
 - (id)initWithFrame:(CGRect)frame;
-- (UIToolbar*)configureKeyboardToolbars: (UITextField*) textField;
-
 
 @end

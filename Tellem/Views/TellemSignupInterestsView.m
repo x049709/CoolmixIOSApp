@@ -154,10 +154,14 @@
     if (continueButton.tag>0) {
         [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [continueButton setEnabled:TRUE];
+        [skipButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [skipButton setEnabled:FALSE];
     }
     else {
         [continueButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [continueButton setEnabled:FALSE];
+        [skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [skipButton setEnabled:TRUE];
     }
 }
 

@@ -6,19 +6,17 @@
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-#import "TPKeyboardAvoidingScrollView.h"
-
 @interface TellemSignupPictureView : UIView<UITextFieldDelegate>
 
-@property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
-@property (nonatomic, strong) UIImageView *inputBackgroundImageView;
-@property (nonatomic, strong) UIImage *inputBackgroundImage;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIImageView *profileImageView;
+@property (nonatomic, strong) UIImage *profileImage;
 @property (nonatomic, strong) UIButton *removeViewButton;
 @property (nonatomic, strong) UITextField *inputFirstName, *inputLastName;
 @property (nonatomic, strong) UITextField *inputUserName;
 @property (nonatomic, strong) UITextField *inputPassword,*retypePassword;
 @property (nonatomic, strong) UIButton *alreadyButton;
-@property (nonatomic, strong) UIButton *continueButton, *skipButton;
+@property (nonatomic, strong) UIButton *finishButton, *skipButton;
 @property (nonatomic, strong) UIButton *forgotPasswordButton;
 @property (nonatomic, strong) UIButton *sportsButton, *newsButton,*musicButton;
 @property (nonatomic, strong) UIButton *entertainmentButton, *lifestyleButton,*techscienceButton;
@@ -26,7 +24,6 @@
 @property (nonatomic, strong) UIButton *fashionButton, *outdoorsadventureButton;
 
 - (id)initWithFrame:(CGRect)frame;
-- (UIToolbar*)configureKeyboardToolbars: (UITextField*) textField;
 
 
 @end

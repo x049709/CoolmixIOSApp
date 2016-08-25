@@ -269,14 +269,16 @@
 }
 
 - (void)showSignupInterests:(id)sender {
-    if (![self areInputsValid:tellemSignupView.inputUserName.text andPassword:tellemSignupView.inputPassword.text])
-    {
-        return;
-    }
+    //TODO Re-enable later to validate
+    //if (![self areInputsValid:tellemSignupView.inputUserName.text andPassword:tellemSignupView.inputPassword.text])
+    //{
+    //    return;
+    //}
     
     tellemSignupInterestsView=[[TellemSignupInterestsView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
     [tellemSignupInterestsView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupInterestsView.continueButton addTarget:self action:@selector(showSignupProfilePicture:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupInterestsView.skipButton addTarget:self action:@selector(skipToSignupProfile:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupInterestsView.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
     [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];
@@ -289,12 +291,27 @@
     
     tellemSignupPictureView=[[TellemSignupPictureView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
     [tellemSignupPictureView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupPictureView.continueButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureView.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupInterestsView.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupPictureView.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
     [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];
     [self.view addSubview:tellemSignupPictureView];
     [ApplicationDelegate.hudd hide:YES];
+    
+}
+
+- (void)skipToSignupProfile:(id)sender {
+    
+    //TODO: Set interests to NONE
+    [self showSignupProfilePicture:sender];
+    
+}
+
+- (void)skipToRegisterNewUser:(id)sender {
+    
+    //TODO: Set picture to NONE
+    [self registerNewUser:sender];
     
 }
 
