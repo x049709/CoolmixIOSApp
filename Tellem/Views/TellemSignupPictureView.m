@@ -15,7 +15,7 @@
 
 @implementation TellemSignupPictureView
 @synthesize scrollView;
-@synthesize profileImageView;
+@synthesize profileImageView, profileImageLabel;
 @synthesize profileImage;
 @synthesize removeViewButton;
 @synthesize inputUserName, inputFirstName, inputLastName;
@@ -60,14 +60,13 @@
         signupLabel.textAlignment = NSTextAlignmentCenter;
         [scrollView addSubview:signupLabel];
         
-        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 15)];
+        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 20)];
         [interestLabel setTextColor:[UIColor blackColor]];
         [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
-        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 10.0f]];
-        interestLabel.text = @"Have a favorite selfie? Add it now!";
+        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
+        interestLabel.text = @"HAVE A FAVORITE SELFIE? ADD IT NOW!";
         [scrollView addSubview:interestLabel];
         
-
         profileImage = [UIImage imageNamed:@"user.png"];
         profileImageView = [[UIImageView alloc] initWithImage:profileImage];
         [profileImageView setFrame:CGRectMake(20, 100, 100, 100)];
@@ -107,7 +106,6 @@
     
     return self;
 }
-
 
 - (void)changeButtonColor:(id)sender {
     

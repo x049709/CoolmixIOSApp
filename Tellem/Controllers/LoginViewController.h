@@ -43,6 +43,7 @@
 @property (nonatomic, strong) TellemForgotPasswordView *resetPasswordView;
 @property (strong, nonatomic) IBOutlet UIButton *mixSigninButton;
 @property (strong, nonatomic) IBOutlet UIButton *shopSigninButton;
+@property UIImage *imagePickedFromGalleryOrCamera;
 
 
 -(IBAction)mixSigninTouched:(id)sender;

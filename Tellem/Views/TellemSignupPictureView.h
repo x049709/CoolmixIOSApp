@@ -11,6 +11,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *profileImageView;
 @property (nonatomic, strong) UIImage *profileImage;
+@property (strong, nonatomic) UILabel *profileImageLabel;
 @property (nonatomic, strong) UIButton *removeViewButton;
 @property (nonatomic, strong) UITextField *inputFirstName, *inputLastName;
 @property (nonatomic, strong) UITextField *inputUserName;
