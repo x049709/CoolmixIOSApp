@@ -445,10 +445,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                     [[self cameraButton] setEnabled:YES];
                     [[self recordButton] setEnabled:YES];
                     [[self stillButton] setEnabled:YES];
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Coolmix" bundle:nil];
-                    self.profilePictureViewController = (ProfilePictureViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ProfilePictureViewController"];
-                    self.profilePictureViewController.image =self.squareImageTaken;
-                    self.profilePictureViewController.postImg.image=self.squareImageTaken;
+                    [self.delegate updateProfilePicture:imageTaken];
                     //[self presentViewController: self.profilePictureViewController animated:YES completion:nil];
                     [self.presentingViewController  dismissViewControllerAnimated:YES completion:nil];
 

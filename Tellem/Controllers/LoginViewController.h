@@ -22,8 +22,9 @@
 #import "TellemGlobals.h"
 #import "RestClient.h"
 #import "UserProfileCamViewController.h"
+#import "ProfilePictureViewController.h"
 
-@interface LoginViewController : UIViewController<UITextFieldDelegate,UIWebViewDelegate,PFLogInViewControllerDelegate,UIScrollViewDelegate>
+@interface LoginViewController : UIViewController<UITextFieldDelegate,UIWebViewDelegate,PFLogInViewControllerDelegate,UIScrollViewDelegate, ProfilePictureProtocol>
 {
     UIScrollView *scrollView;
     BOOL firstLaunch;

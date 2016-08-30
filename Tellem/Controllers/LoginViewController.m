@@ -309,14 +309,20 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Coolmix" bundle:nil];
 
     userProfileCamViewController=(UserProfileCamViewController *)[storyboard instantiateViewControllerWithIdentifier:@"UserProfileCamViewController"];
+    userProfileCamViewController.delegate = self;
     [self presentViewController:userProfileCamViewController animated:YES completion:Nil];
-    [self showSignupProfileDetails];
     
+}
+
+-(void) updateProfilePicture:(UIImage *)profilePicture;
+{
+    self.profileImage = profilePicture;
+    [self showSignupProfileDetails];
 }
 
 - (void)showSignupProfileDetails {
     
-    tellemSignupPictureDetails=[[TellemSignupPictureDetails alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10) andProfilePicture:[UIImage imageNamed:@"icon.png"]];
+    tellemSignupPictureDetails=[[TellemSignupPictureDetails alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10) andProfilePicture:self.profileImage];
     [tellemSignupPictureDetails.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupPictureDetails.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupPictureDetails.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];

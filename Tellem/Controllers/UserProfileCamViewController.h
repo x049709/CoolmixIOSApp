@@ -56,6 +56,13 @@
 #import "TellemButton.h"
 #import "ProfilePictureViewController.h"
 
+@protocol ProfilePictureProtocol <NSObject>
+
+@optional
+-(void)updateProfilePicture:(UIImage *)profilePicture;
+
+@end
+
 
 @interface UserProfileCamViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
