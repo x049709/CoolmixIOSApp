@@ -16,11 +16,12 @@
 #import "TellemSignupView.h"
 #import "TellemSignupInterestsView.h"
 #import "TellemSignupPictureView.h"
+#import "TellemSignupPictureDetails.h"
 #import "TellemForgotPasswordView.h"
 #import "PAPUtility.h"
 #import "TellemGlobals.h"
 #import "RestClient.h"
-
+#import "UserProfileCamViewController.h"
 
 @interface LoginViewController : UIViewController<UITextFieldDelegate,UIWebViewDelegate,PFLogInViewControllerDelegate,UIScrollViewDelegate>
 {
@@ -33,17 +34,20 @@
 @property (strong, nonatomic) UIImageView *textfielImg;
 @property (weak, nonatomic)   UILabel *titleLbl;
 @property (strong, nonatomic) UIImageView *titlImg;
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIImage *image, *profileImage;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
 @property (nonatomic, strong) MokriyaUITabBarController *tabBarController;
 @property (nonatomic, strong) TellemLoginView *tellemLoginView;
 @property (nonatomic, strong) TellemSignupView *tellemSignupView;
 @property (nonatomic, strong) TellemSignupInterestsView *tellemSignupInterestsView;
 @property (nonatomic, strong) TellemSignupPictureView *tellemSignupPictureView;
+@property (nonatomic, strong) TellemSignupPictureDetails *tellemSignupPictureDetails;
 @property (nonatomic, strong) TellemForgotPasswordView *resetPasswordView;
 @property (strong, nonatomic) IBOutlet UIButton *mixSigninButton;
 @property (strong, nonatomic) IBOutlet UIButton *shopSigninButton;
 @property UIImage *imagePickedFromGalleryOrCamera;
+@property UserProfileCamViewController *userProfileCamViewController;
+
 
 
 -(IBAction)mixSigninTouched:(id)sender;

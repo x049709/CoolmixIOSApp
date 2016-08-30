@@ -29,10 +29,10 @@
 
 @implementation LoginViewController
 
-@synthesize tabBarController,titleLbl,titlImg,textfielImg;
+@synthesize tabBarController,titleLbl,titlImg,textfielImg, profileImage ;
 @synthesize isLogin,tellemLoginView,tellemSignupView,tellemSignupInterestsView,tellemSignupPictureView,resetPasswordView;
-@synthesize user_id, imagePickedFromGalleryOrCamera;
-@synthesize mixSigninButton,shopSigninButton;
+@synthesize user_id, imagePickedFromGalleryOrCamera,tellemSignupPictureDetails;
+@synthesize mixSigninButton,shopSigninButton, userProfileCamViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -306,52 +306,31 @@
 }
 
 - (void)profileImageViewTouched{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Coolmix" bundle:nil];
+
+    userProfileCamViewController=(UserProfileCamViewController *)[storyboard instantiateViewControllerWithIdentifier:@"UserProfileCamViewController"];
+    [self presentViewController:userProfileCamViewController animated:YES completion:Nil];
+    [self showSignupProfileDetails];
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use photo from camera",@"Use photo from gallery", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showInView:self.view];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            [self photoFromCamera];
-            break;
-        case 1:
-            [self photoFromGallery];
-            break;
-        default:
-            break;
-    }
+- (void)showSignupProfileDetails {
+    
+    tellemSignupPictureDetails=[[TellemSignupPictureDetails alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10) andProfilePicture:[UIImage imageNamed:@"icon.png"]];
+    [tellemSignupPictureDetails.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureDetails.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureDetails.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureDetails.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *profileImageViewTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageViewTouched)];
+    profileImageViewTouch.numberOfTapsRequired = 1;
+    [tellemSignupPictureDetails.profileImageView setUserInteractionEnabled:YES];
+    [tellemSignupPictureDetails.profileImageView addGestureRecognizer:profileImageViewTouch];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
+    [ApplicationDelegate.hudd show:YES];
+    [self.view addSubview:tellemSignupPictureDetails];
+    [ApplicationDelegate.hudd hide:YES];
+    
 }
-
--(void)photoFromCamera{
-    UIImagePickerController * imagePickerFromCamera = [[UIImagePickerController alloc] init];
-    imagePickerFromCamera.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerFromCamera.delegate = self;
-    [self presentViewController:imagePickerFromCamera animated:YES completion:Nil];
-}
-
--(void)photoFromGallery{
-    UIImagePickerController *imagePickerFromGallery=[[UIImagePickerController alloc]init];
-    imagePickerFromGallery.delegate=self;
-    imagePickerFromGallery.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:imagePickerFromGallery animated:YES completion:Nil];
-}
-
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *imagePicked = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.imagePickedFromGalleryOrCamera=imagePicked;
-    [picker dismissViewControllerAnimated:YES completion:Nil];
-}
-
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:Nil];
-}
-
 
 - (void)skipToSignupProfile:(id)sender {
     
