@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-@interface TellemSignupPictureDetails : UIView<UITextFieldDelegate>
+@interface TellemSignupDescribeMe : UIView<UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *profileImageView;
@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIButton *entertainmentButton, *lifestyleButton,*techscienceButton;
 @property (nonatomic, strong) UIButton *artButton, *gamingButton,*foodButton;
 @property (nonatomic, strong) UIButton *fashionButton, *outdoorsadventureButton;
+@property (weak, nonatomic)  UITextView *commentTextField;
 
 - (id)initWithFrame:(CGRect)frame andProfilePicture:(UIImage*) profilePicture;
 

@@ -69,7 +69,11 @@
         
         profileImage = [UIImage imageNamed:@"user.png"];
         profileImageView = [[UIImageView alloc] initWithImage:profileImage];
-        [profileImageView setFrame:CGRectMake(20, 100, 100, 100)];
+        [profileImageView setFrame:CGRectMake(25, 100, 200, 200)];
+        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2.0f;
+        profileImageView.layer.masksToBounds = YES;
+        profileImageView.layer.borderWidth = 0;
+
         [profileImageView setBackgroundColor:[UIColor whiteColor]];
         [scrollView addSubview:profileImageView];
         

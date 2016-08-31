@@ -16,7 +16,7 @@
 #import "TellemSignupView.h"
 #import "TellemSignupInterestsView.h"
 #import "TellemSignupPictureView.h"
-#import "TellemSignupPictureDetails.h"
+#import "TellemSignupDescribeMe.h"
 #import "TellemForgotPasswordView.h"
 #import "PAPUtility.h"
 #import "TellemGlobals.h"
@@ -42,7 +42,7 @@
 @property (nonatomic, strong) TellemSignupView *tellemSignupView;
 @property (nonatomic, strong) TellemSignupInterestsView *tellemSignupInterestsView;
 @property (nonatomic, strong) TellemSignupPictureView *tellemSignupPictureView;
-@property (nonatomic, strong) TellemSignupPictureDetails *tellemSignupPictureDetails;
+@property (nonatomic, strong) TellemSignupDescribeMe *tellemSignupDescribeMe;
 @property (nonatomic, strong) TellemForgotPasswordView *resetPasswordView;
 @property (strong, nonatomic) IBOutlet UIButton *mixSigninButton;
 @property (strong, nonatomic) IBOutlet UIButton *shopSigninButton;

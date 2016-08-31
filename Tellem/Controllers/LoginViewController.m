@@ -31,7 +31,7 @@
 
 @synthesize tabBarController,titleLbl,titlImg,textfielImg, profileImage ;
 @synthesize isLogin,tellemLoginView,tellemSignupView,tellemSignupInterestsView,tellemSignupPictureView,resetPasswordView;
-@synthesize user_id, imagePickedFromGalleryOrCamera,tellemSignupPictureDetails;
+@synthesize user_id, imagePickedFromGalleryOrCamera,tellemSignupDescribeMe;
 @synthesize mixSigninButton,shopSigninButton, userProfileCamViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -317,23 +317,23 @@
 -(void) updateProfilePicture:(UIImage *)profilePicture;
 {
     self.profileImage = profilePicture;
-    [self showSignupProfileDetails];
+    [self showSignupDescribeMe];
 }
 
-- (void)showSignupProfileDetails {
+- (void)showSignupDescribeMe {
     
-    tellemSignupPictureDetails=[[TellemSignupPictureDetails alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10) andProfilePicture:self.profileImage];
-    [tellemSignupPictureDetails.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupPictureDetails.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupPictureDetails.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupPictureDetails.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
+    tellemSignupDescribeMe=[[TellemSignupDescribeMe alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10) andProfilePicture:self.profileImage];
+    [tellemSignupDescribeMe.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDescribeMe.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDescribeMe.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDescribeMe.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *profileImageViewTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageViewTouched)];
     profileImageViewTouch.numberOfTapsRequired = 1;
-    [tellemSignupPictureDetails.profileImageView setUserInteractionEnabled:YES];
-    [tellemSignupPictureDetails.profileImageView addGestureRecognizer:profileImageViewTouch];
+    [tellemSignupDescribeMe.profileImageView setUserInteractionEnabled:YES];
+    [tellemSignupDescribeMe.profileImageView addGestureRecognizer:profileImageViewTouch];
     [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];
-    [self.view addSubview:tellemSignupPictureDetails];
+    [self.view addSubview:tellemSignupDescribeMe];
     [ApplicationDelegate.hudd hide:YES];
     
 }

@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-#import "TellemSignupPictureDetails.h"
+#import "TellemSignupDescribeMe.h"
 
 
-@interface TellemSignupPictureDetails ()
+@interface TellemSignupDescribeMe ()
 @end
 
 
-@implementation TellemSignupPictureDetails
+@implementation TellemSignupDescribeMe
 @synthesize scrollView;
 @synthesize profileImageView, profileImageLabel;
 @synthesize profileImage;
@@ -26,7 +26,7 @@
 @synthesize sportsButton, newsButton, musicButton;
 @synthesize entertainmentButton, lifestyleButton, techscienceButton;
 @synthesize artButton, gamingButton, foodButton;
-@synthesize fashionButton, outdoorsadventureButton;
+@synthesize fashionButton, outdoorsadventureButton, commentTextField;
 
 #pragma mark - Initialization
 
@@ -56,22 +56,42 @@
         [signupLabel setTextColor:[UIColor whiteColor]];
         [signupLabel setBackgroundColor:[UIColor blackColor]];
         [signupLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
-        signupLabel.text = @"PICK A PROFILE PICTURE";
+        signupLabel.text = @"DESCRIBE YOURSELF";
         signupLabel.textAlignment = NSTextAlignmentCenter;
         [scrollView addSubview:signupLabel];
         
-        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 20)];
-        [interestLabel setTextColor:[UIColor blackColor]];
-        [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
-        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
-        interestLabel.text = @"HAVE A FAVORITE SELFIE? ADD IT NOW!";
-        [scrollView addSubview:interestLabel];
-        
         profileImage = profilePicture;
         profileImageView = [[UIImageView alloc] initWithImage:profileImage];
-        [profileImageView setFrame:CGRectMake(20, 100, 100, 100)];
+        [profileImageView setFrame:CGRectMake(20, 60, 60, 60)];
+        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2.0f;
+        profileImageView.layer.masksToBounds = YES;
+        profileImageView.layer.borderWidth = 0;
         [profileImageView setBackgroundColor:[UIColor whiteColor]];
         [scrollView addSubview:profileImageView];
+        
+        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, scrollView.frame.size.width - 40, 30)];
+        [interestLabel setTextColor:[UIColor blackColor]];
+        [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
+        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
+        interestLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        interestLabel.numberOfLines = 0;
+        interestLabel.text = @"WHAT IS IT THAT MAKES YOU SPECIAL? WHAT KIND OF THINGS ARE YOU INTO? HAVE FUN WITH IT!";
+        [scrollView addSubview:interestLabel];
+        
+        self.commentTextField = [[UITextView alloc] initWithFrame:CGRectMake(20, 170, 210, 180)];
+        self.commentTextField.layer.borderWidth = 1.0;
+        self.commentTextField.layer.borderColor = [[UIColor darkGrayColor]CGColor];
+        self.commentTextField.clearsOnInsertion = TRUE;
+        [self.commentTextField resignFirstResponder];
+        self.commentTextField.delegate = self;
+        self.commentTextField.backgroundColor = [UIColor whiteColor];
+        self.commentTextField.font = [UIFont fontWithName:kFontThin size:10.0];
+        [self.commentTextField setTextColor:[UIColor blackColor]];
+        //[self.commentTextField setPlaceholderColor:[UIColor darkGrayColor]];
+        [self.commentTextField setTintColor:[UIColor blackColor]];
+        //[self.commentTextField setPlaceholder:@"Type in here..."];
+        [scrollView addSubview:self.commentTextField];
+
         
         finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [finishButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
@@ -136,6 +156,22 @@
     }
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
 
 
 @end
