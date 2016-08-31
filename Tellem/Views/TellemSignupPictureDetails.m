@@ -48,7 +48,7 @@
         [removeViewButton setFrame:CGRectMake(self.bounds.origin.x+self.bounds.size.width-40, 25.0f, 32.0f, 32.0f)];
         [removeViewButton setBackgroundColor:[UIColor clearColor]];
         [[removeViewButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        [removeViewButton setBackgroundImage:profilePicture forState:UIControlStateNormal];
+        [removeViewButton setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal];
         [removeViewButton setSelected:NO];
         [self addSubview:removeViewButton];
         
