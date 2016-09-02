@@ -1,19 +1,19 @@
 //
-//  TellemSignupPictureDetails.m
+//  TellemSignupDOBOptions.m
 //  Tellem
 //
 //  Created by Ed Bayudan on 1/28/15.
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-#import "TellemSignupDescribeMe.h"
+#import "TellemSignupDOBOptions.h"
 
 
-@interface TellemSignupDescribeMe ()
+@interface TellemSignupDOBOptions ()
 @end
 
 
-@implementation TellemSignupDescribeMe
+@implementation TellemSignupDOBOptions
 @synthesize scrollView;
 @synthesize profileImageView, profileImageLabel;
 @synthesize profileImage;
@@ -26,11 +26,11 @@
 @synthesize sportsButton, newsButton, musicButton;
 @synthesize entertainmentButton, lifestyleButton, techscienceButton;
 @synthesize artButton, gamingButton, foodButton;
-@synthesize fashionButton, outdoorsadventureButton, commentTextField;
+@synthesize fashionButton, outdoorsadventureButton;
 
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame andProfilePicture:(UIImage*) profilePicture {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
@@ -56,48 +56,34 @@
         [signupLabel setTextColor:[UIColor whiteColor]];
         [signupLabel setBackgroundColor:[UIColor blackColor]];
         [signupLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
-        signupLabel.text = @"DESCRIBE YOURSELF";
+        signupLabel.text = @"ADD YOUR BIRTHDAY";
         signupLabel.textAlignment = NSTextAlignmentCenter;
         [scrollView addSubview:signupLabel];
         
-        profileImage = profilePicture;
-        profileImageView = [[UIImageView alloc] initWithImage:profileImage];
-        [profileImageView setFrame:CGRectMake(20, 60, 60, 60)];
-        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2.0f;
-        profileImageView.layer.masksToBounds = YES;
-        profileImageView.layer.borderWidth = 0;
-        [profileImageView setBackgroundColor:[UIColor whiteColor]];
-        [scrollView addSubview:profileImageView];
-        
-        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, scrollView.frame.size.width - 40, 30)];
+        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 20)];
         [interestLabel setTextColor:[UIColor blackColor]];
         [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
         [interestLabel setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
         interestLabel.lineBreakMode = NSLineBreakByWordWrapping;
         interestLabel.numberOfLines = 0;
-        interestLabel.text = @"WHAT IS IT THAT MAKES YOU SPECIAL? WHAT KIND OF THINGS ARE YOU INTO? HAVE FUN WITH IT!";
+        interestLabel.text = @"LET YOUR FRIENDS CELEBRATE WITH YOU! YOU ARE ALWAYS IN CONTROL OF WHO CAN SEE IT. ";
         [scrollView addSubview:interestLabel];
         
-        self.commentTextField = [[UITextView alloc] initWithFrame:CGRectMake(20, 170, 210, 180)];
-        self.commentTextField.layer.borderWidth = 1.0;
-        self.commentTextField.layer.borderColor = [[UIColor darkGrayColor]CGColor];
-        self.commentTextField.clearsOnInsertion = TRUE;
-        [self.commentTextField resignFirstResponder];
-        self.commentTextField.delegate = self;
-        self.commentTextField.backgroundColor = [UIColor whiteColor];
-        self.commentTextField.font = [UIFont fontWithName:kFontThin size:10.0];
-        [self.commentTextField setTextColor:[UIColor blackColor]];
-        //[self.commentTextField setPlaceholderColor:[UIColor darkGrayColor]];
-        [self.commentTextField setTintColor:[UIColor blackColor]];
-        //[self.commentTextField setPlaceholder:@"Type in here..."];
-        [scrollView addSubview:self.commentTextField];
-
+        profileImage = [UIImage imageNamed:@"user.png"];
+        profileImageView = [[UIImageView alloc] initWithImage:profileImage];
+        [profileImageView setFrame:CGRectMake(25, 100, 200, 200)];
+        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2.0f;
+        profileImageView.layer.masksToBounds = YES;
+        profileImageView.layer.borderWidth = 0;
+        
+        [profileImageView setBackgroundColor:[UIColor whiteColor]];
+        [scrollView addSubview:profileImageView];
         
         continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
         [continueButton setBackgroundColor:[UIColor whiteColor]];
         [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [continueButton setTitle:@"CONTINUE" forState:UIControlStateNormal];
+        [continueButton setTitle:@"FINISH" forState:UIControlStateNormal];
         [continueButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
         [continueButton setSelected:NO];
         continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -156,22 +142,6 @@
     }
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
-}
 
 
 @end

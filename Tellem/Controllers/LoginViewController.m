@@ -31,8 +31,8 @@
 
 @synthesize tabBarController,titleLbl,titlImg,textfielImg, profileImage ;
 @synthesize isLogin,tellemLoginView,tellemSignupView,tellemSignupInterestsView,tellemSignupPictureView,resetPasswordView;
-@synthesize user_id, imagePickedFromGalleryOrCamera,tellemSignupDescribeMe;
-@synthesize mixSigninButton,shopSigninButton, userProfileCamViewController;
+@synthesize user_id, imagePickedFromGalleryOrCamera,tellemSignupDescribeMe,tellemSignupDOB,tellemSignupDOBOptions;
+@synthesize mixSigninButton,shopSigninButton, userProfileCamViewController,dob;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -291,8 +291,8 @@
     
     tellemSignupPictureView=[[TellemSignupPictureView alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
     [tellemSignupPictureView.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupPictureView.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupPictureView.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureView.continueButton addTarget:self action:@selector(showSignupDescribeMe:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupPictureView.skipButton addTarget:self action:@selector(skipToDescribeMe:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupPictureView.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *profileImageViewTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageViewTouched)];
     profileImageViewTouch.numberOfTapsRequired = 1;
@@ -320,12 +320,18 @@
     [self showSignupDescribeMe];
 }
 
+- (void)showSignupDescribeMe:(id)sender {
+    
+    [self showSignupDescribeMe];
+    
+}
+
 - (void)showSignupDescribeMe {
     
     tellemSignupDescribeMe=[[TellemSignupDescribeMe alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10) andProfilePicture:self.profileImage];
     [tellemSignupDescribeMe.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupDescribeMe.finishButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
-    [tellemSignupDescribeMe.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDescribeMe.continueButton addTarget:self action:@selector(showSignupDOB:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDescribeMe.skipButton addTarget:self action:@selector(skipToSignupDOB:) forControlEvents:UIControlEventTouchUpInside];
     [tellemSignupDescribeMe.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *profileImageViewTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageViewTouched)];
     profileImageViewTouch.numberOfTapsRequired = 1;
@@ -348,11 +354,88 @@
 - (void)skipToRegisterNewUser:(id)sender {
     
     //TODO: Set picture to NONE
-    [self registerNewUser:sender];
+    NSString *alertMsgMM = [@"DOB:" stringByAppendingString:self.tellemSignupDOB.monthDOB.text];
+    NSString *alertMsgMMDD = [alertMsgMM stringByAppendingString:self.tellemSignupDOB.dayDOB.text];
+    NSString *alertMsgMMDDYY = [alertMsgMMDD stringByAppendingString:self.tellemSignupDOB.yearDOB.text];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Tellem" message:alertMsgMMDDYY delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+    [alert show];
+
+
+    //[self registerNewUser:sender];
+    
+}
+
+- (void)skipToDescribeMe:(id)sender {
+    
+    //TODO: Set picture to NONE
+    self.profileImage = [UIImage imageNamed:@"user.png"];
+    [self showSignupDescribeMe];
+    
+}
+
+- (void)skipToSignupDOB:(id)sender {
+    
+    //TODO: Set picture to NONE
+    [self showSignupDOB];
+    
+}
+
+
+
+- (void)showSignupDOB:(id)sender {
+    
+    [self showSignupDOB];
+    
+}
+
+- (void)showSignupDOB {
+    
+    tellemSignupDOB=[[TellemSignupDOB alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
+    [tellemSignupDOB.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDOB.continueButton addTarget:self action:@selector(showSignupDOBOptions:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDOB.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDOB.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
+    [ApplicationDelegate.hudd show:YES];
+    [self.view addSubview:tellemSignupDOB];
+    [ApplicationDelegate.hudd hide:YES];
+    
+}
+
+-(void) updateDOB:(NSDate *)dobDate;
+{
+    self.dob = dobDate;
+    [self showSignupDOBOptions];
+}
+
+- (void)showSignupDOBOptions:(id)sender {
+    
+    //TODO: Set picture to NONE
+    [self showSignupDOBOptions];
+    
+}
+
+
+
+- (void)showSignupDOBOptions {
+    
+    tellemSignupDOBOptions=[[TellemSignupDOBOptions alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
+    [tellemSignupDOBOptions.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDOBOptions.continueButton addTarget:self action:@selector(registerNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDOBOptions.skipButton addTarget:self action:@selector(skipToRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    [tellemSignupDOBOptions.alreadyButton addTarget:self action:@selector(showSigninUser:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
+    [ApplicationDelegate.hudd show:YES];
+    [self.view addSubview:tellemSignupDOBOptions];
+    [ApplicationDelegate.hudd hide:YES];
     
 }
 
 - (void)registerNewUser:(id)sender {
+    [self registerNewUser];
+}
+
+- (void)registerNewUser {
     
     [self.view.window addSubview:ApplicationDelegate.hudd];
     [ApplicationDelegate.hudd show:YES];

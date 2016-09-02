@@ -20,7 +20,7 @@
 @synthesize removeViewButton;
 @synthesize inputUserName, inputFirstName, inputLastName;
 @synthesize inputPassword,retypePassword;
-@synthesize finishButton,skipButton;
+@synthesize continueButton,skipButton;
 @synthesize alreadyButton;
 @synthesize forgotPasswordButton;
 @synthesize sportsButton, newsButton, musicButton;
@@ -77,15 +77,15 @@
         [profileImageView setBackgroundColor:[UIColor whiteColor]];
         [scrollView addSubview:profileImageView];
         
-        finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [finishButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
-        [finishButton setBackgroundColor:[UIColor whiteColor]];
-        [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [finishButton setTitle:@"FINISH" forState:UIControlStateNormal];
-        [finishButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
-        [finishButton setSelected:NO];
-        finishButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [scrollView addSubview:finishButton];
+        continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
+        [continueButton setBackgroundColor:[UIColor whiteColor]];
+        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [continueButton setTitle:@"CONTINUE" forState:UIControlStateNormal];
+        [continueButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
+        [continueButton setSelected:NO];
+        continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [scrollView addSubview:continueButton];
         
         skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [skipButton setFrame:CGRectMake(20, scrollView.frame.size.height - 40, 60, 25)];
@@ -118,23 +118,23 @@
         btn.tag = 1;
         [btn setBackgroundColor:[UIColor blackColor]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        finishButton.tag++;
+        continueButton.tag++;
     } else {
         btn.tag = 0;
         [btn setBackgroundColor:[UIColor whiteColor]];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        finishButton.tag--;
+        continueButton.tag--;
     }
     
-    if (finishButton.tag>0) {
-        [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [finishButton setEnabled:TRUE];
+    if (continueButton.tag>0) {
+        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [continueButton setEnabled:TRUE];
         [skipButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [skipButton setEnabled:FALSE];
     }
     else {
-        [finishButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [finishButton setEnabled:FALSE];
+        [continueButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [continueButton setEnabled:FALSE];
         [skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [skipButton setEnabled:TRUE];
     }

@@ -15,22 +15,18 @@
 
 @implementation TellemSignupDOB
 @synthesize scrollView;
-@synthesize profileImageView, profileImageLabel;
-@synthesize profileImage;
 @synthesize removeViewButton;
-@synthesize inputUserName, inputFirstName, inputLastName;
-@synthesize inputPassword,retypePassword;
-@synthesize finishButton,skipButton;
+@synthesize continueButton,skipButton;
 @synthesize alreadyButton;
 @synthesize forgotPasswordButton;
 @synthesize sportsButton, newsButton, musicButton;
 @synthesize entertainmentButton, lifestyleButton, techscienceButton;
-@synthesize artButton, gamingButton, foodButton;
-@synthesize fashionButton, outdoorsadventureButton, commentTextField;
+@synthesize artButton, gamingButton, foodButton,whoSeesMMDDPicker,whoSeesMMDDYYPicker;
+@synthesize fashionButton, outdoorsadventureButton, monthPicker,dayPicker,yearPicker, monthDOB, dayDOB,yearDOB, whoSeesMMDD, whoSeesMMDDYY;
 
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame andProfilePicture:(UIImage*) profilePicture {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
@@ -56,52 +52,99 @@
         [signupLabel setTextColor:[UIColor whiteColor]];
         [signupLabel setBackgroundColor:[UIColor blackColor]];
         [signupLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
-        signupLabel.text = @"DESCRIBE YOURSELF";
+        signupLabel.text = @"ADD YOUR BIRTHDAY";
         signupLabel.textAlignment = NSTextAlignmentCenter;
         [scrollView addSubview:signupLabel];
         
-        profileImage = profilePicture;
-        profileImageView = [[UIImageView alloc] initWithImage:profileImage];
-        [profileImageView setFrame:CGRectMake(20, 60, 60, 60)];
-        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2.0f;
-        profileImageView.layer.masksToBounds = YES;
-        profileImageView.layer.borderWidth = 0;
-        [profileImageView setBackgroundColor:[UIColor whiteColor]];
-        [scrollView addSubview:profileImageView];
-        
-        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, scrollView.frame.size.width - 40, 30)];
+        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 20)];
         [interestLabel setTextColor:[UIColor blackColor]];
         [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
         [interestLabel setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
         interestLabel.lineBreakMode = NSLineBreakByWordWrapping;
         interestLabel.numberOfLines = 0;
-        interestLabel.text = @"WHAT IS IT THAT MAKES YOU SPECIAL? WHAT KIND OF THINGS ARE YOU INTO? HAVE FUN WITH IT!";
+        interestLabel.text = @"LET YOUR FRIENDS CELEBRATE WITH YOU! YOU ARE ALWAYS IN CONTROL OF WHO CAN SEE IT. ";
         [scrollView addSubview:interestLabel];
         
-        self.commentTextField = [[UITextView alloc] initWithFrame:CGRectMake(20, 170, 210, 180)];
-        self.commentTextField.layer.borderWidth = 1.0;
-        self.commentTextField.layer.borderColor = [[UIColor darkGrayColor]CGColor];
-        self.commentTextField.clearsOnInsertion = TRUE;
-        [self.commentTextField resignFirstResponder];
-        self.commentTextField.delegate = self;
-        self.commentTextField.backgroundColor = [UIColor whiteColor];
-        self.commentTextField.font = [UIFont fontWithName:kFontThin size:10.0];
-        [self.commentTextField setTextColor:[UIColor blackColor]];
-        //[self.commentTextField setPlaceholderColor:[UIColor darkGrayColor]];
-        [self.commentTextField setTintColor:[UIColor blackColor]];
-        //[self.commentTextField setPlaceholder:@"Type in here..."];
-        [scrollView addSubview:self.commentTextField];
-
+        NSMutableArray* monthArray = [[NSMutableArray alloc] init];
+        [monthArray addObject:@"January"];
+        [monthArray addObject:@"February"];
+        [monthArray addObject:@"March"];
+        [monthArray addObject:@"April"];
+        [monthArray addObject:@"May"];
+        [monthArray addObject:@"May"];
         
-        finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [finishButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
-        [finishButton setBackgroundColor:[UIColor whiteColor]];
-        [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [finishButton setTitle:@"FINISH" forState:UIControlStateNormal];
-        [finishButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
-        [finishButton setSelected:NO];
-        finishButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [scrollView addSubview:finishButton];
+        NSMutableArray* dayArray = [[NSMutableArray alloc] init];
+        [dayArray addObject:@"1"];
+        [dayArray addObject:@"2"];
+        [dayArray addObject:@"3"];
+        [dayArray addObject:@"4"];
+        [dayArray addObject:@"5"];
+        [dayArray addObject:@"6"];
+
+        NSMutableArray* yearArray = [[NSMutableArray alloc] init];
+        [yearArray addObject:@"1960"];
+        [yearArray addObject:@"1962"];
+        [yearArray addObject:@"1963"];
+        [yearArray addObject:@"1964"];
+        [yearArray addObject:@"1965"];
+        [yearArray addObject:@"1966"];
+       
+        monthDOB = [[UITextField alloc]  initWithFrame:CGRectMake(20, 110, scrollView.frame.size.width - 80, 30)];
+        self.monthPicker = [[DownPicker alloc] initWithTextField:monthDOB withData:monthArray];
+        [self.monthPicker setPlaceholder:@"MONTH"];
+        [self.monthPicker setToolbarStyle:UIBarStyleBlack];
+        [scrollView addSubview:monthDOB];
+        
+        dayDOB = [[UITextField alloc]  initWithFrame:CGRectMake(20, 150, scrollView.frame.size.width - 80, 30)];
+        self.dayPicker = [[DownPicker alloc] initWithTextField:dayDOB withData:dayArray];
+        [self.dayPicker setPlaceholder:@"DAY"];
+        [self.dayPicker setToolbarStyle:UIBarStyleBlack];
+        [scrollView addSubview:dayDOB];
+        
+        yearDOB = [[UITextField alloc]  initWithFrame:CGRectMake(20, 190, scrollView.frame.size.width - 80, 30)];
+        self.yearPicker = [[DownPicker alloc] initWithTextField:yearDOB withData:yearArray];
+        [self.yearPicker setPlaceholder:@"YEAR"];
+        [self.yearPicker setToolbarStyle:UIBarStyleBlack];
+        [scrollView addSubview:yearDOB];
+        
+        UILabel *whoseesLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 230, scrollView.frame.size.width - 40, 20)];
+        [whoseesLabel setTextColor:[UIColor blackColor]];
+        [whoseesLabel setBackgroundColor:[UIColor lightGrayColor]];
+        [whoseesLabel setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
+         whoseesLabel.text = @"WHO SEES THIS ------------------------------------------------------------";
+        [scrollView addSubview:whoseesLabel];
+        
+        NSMutableArray* mmddChoices = [[NSMutableArray alloc] init];
+        [mmddChoices addObject:@"MONTH & DAY (we are friends)"];
+        [mmddChoices addObject:@"MONTH & DAY (we are strangers)"];
+ 
+        whoSeesMMDD = [[UITextField alloc]  initWithFrame:CGRectMake(20, 260, scrollView.frame.size.width - 40, 30)];
+        [whoSeesMMDD setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
+        self.whoSeesMMDDPicker = [[DownPicker alloc] initWithTextField:whoSeesMMDD withData:mmddChoices];
+        [self.whoSeesMMDDPicker setPlaceholder:@"MONTH & DAY"];
+        [self.whoSeesMMDDPicker setToolbarStyle:UIBarStyleBlack];
+        [scrollView addSubview:whoSeesMMDD];
+        
+        NSMutableArray* mmddyyChoices = [[NSMutableArray alloc] init];
+        [mmddyyChoices addObject:@"YEAR (only me)"];
+        [mmddyyChoices addObject:@"YEAR (we are friends)"];
+        
+        whoSeesMMDDYY = [[UITextField alloc]  initWithFrame:CGRectMake(20, 300, scrollView.frame.size.width - 40, 30)];
+        [whoSeesMMDDYY setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
+        self.whoSeesMMDDYYPicker = [[DownPicker alloc] initWithTextField:whoSeesMMDDYY withData:mmddyyChoices];
+        [self.whoSeesMMDDYYPicker setPlaceholder:@"YEAR"];
+        [self.whoSeesMMDDYYPicker setToolbarStyle:UIBarStyleBlack];
+        [scrollView addSubview:whoSeesMMDDYY];
+        
+        continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
+        [continueButton setBackgroundColor:[UIColor whiteColor]];
+        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [continueButton setTitle:@"FINISH" forState:UIControlStateNormal];
+        [continueButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
+        [continueButton setSelected:NO];
+        continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [scrollView addSubview:continueButton];
         
         skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [skipButton setFrame:CGRectMake(20, scrollView.frame.size.height - 40, 60, 25)];
@@ -134,44 +177,28 @@
         btn.tag = 1;
         [btn setBackgroundColor:[UIColor blackColor]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        finishButton.tag++;
+        continueButton.tag++;
     } else {
         btn.tag = 0;
         [btn setBackgroundColor:[UIColor whiteColor]];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        finishButton.tag--;
+        continueButton.tag--;
     }
     
-    if (finishButton.tag>0) {
-        [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [finishButton setEnabled:TRUE];
+    if (continueButton.tag>0) {
+        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [continueButton setEnabled:TRUE];
         [skipButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [skipButton setEnabled:FALSE];
     }
     else {
-        [finishButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [finishButton setEnabled:FALSE];
+        [continueButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [continueButton setEnabled:FALSE];
         [skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [skipButton setEnabled:TRUE];
     }
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
-}
 
 
 @end
