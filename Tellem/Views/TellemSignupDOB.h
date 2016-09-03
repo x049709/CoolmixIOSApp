@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIButton *removeViewButton;
 @property (nonatomic, strong) UIButton *alreadyButton;
-@property (nonatomic, strong) UIButton *continueButton, *skipButton;
+@property (nonatomic, strong) UIButton *finishButton, *skipButton;
 @property (nonatomic, strong) UIButton *forgotPasswordButton;
 @property (nonatomic, strong) UIButton *sportsButton, *newsButton,*musicButton;
 @property (nonatomic, strong) UIButton *entertainmentButton, *lifestyleButton,*techscienceButton;

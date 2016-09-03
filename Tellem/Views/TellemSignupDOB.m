@@ -16,7 +16,7 @@
 @implementation TellemSignupDOB
 @synthesize scrollView;
 @synthesize removeViewButton;
-@synthesize continueButton,skipButton;
+@synthesize finishButton,skipButton;
 @synthesize alreadyButton;
 @synthesize forgotPasswordButton;
 @synthesize sportsButton, newsButton, musicButton;
@@ -71,23 +71,26 @@
         [monthArray addObject:@"March"];
         [monthArray addObject:@"April"];
         [monthArray addObject:@"May"];
-        [monthArray addObject:@"May"];
+        [monthArray addObject:@"June"];
+        [monthArray addObject:@"July"];
+        [monthArray addObject:@"August"];
+        [monthArray addObject:@"September"];
+        [monthArray addObject:@"October"];
+        [monthArray addObject:@"November"];
+        [monthArray addObject:@"December"];
         
         NSMutableArray* dayArray = [[NSMutableArray alloc] init];
-        [dayArray addObject:@"1"];
-        [dayArray addObject:@"2"];
-        [dayArray addObject:@"3"];
-        [dayArray addObject:@"4"];
-        [dayArray addObject:@"5"];
-        [dayArray addObject:@"6"];
+        for (int i = 1; i < 32; ++i) {
+            NSString *dateOfBirth = [NSString stringWithFormat:@"%d", i];
+            [dayArray addObject:dateOfBirth];
+        }
+
 
         NSMutableArray* yearArray = [[NSMutableArray alloc] init];
-        [yearArray addObject:@"1960"];
-        [yearArray addObject:@"1962"];
-        [yearArray addObject:@"1963"];
-        [yearArray addObject:@"1964"];
-        [yearArray addObject:@"1965"];
-        [yearArray addObject:@"1966"];
+        for (int i = 1950; i < 2025; ++i) {
+            NSString *yearOfBirth = [NSString stringWithFormat:@"%d", i];
+            [yearArray addObject:yearOfBirth];
+        }
        
         monthDOB = [[UITextField alloc]  initWithFrame:CGRectMake(20, 110, scrollView.frame.size.width - 80, 30)];
         self.monthPicker = [[DownPicker alloc] initWithTextField:monthDOB withData:monthArray];
@@ -111,7 +114,7 @@
         [whoseesLabel setTextColor:[UIColor blackColor]];
         [whoseesLabel setBackgroundColor:[UIColor lightGrayColor]];
         [whoseesLabel setFont:[UIFont fontWithName: kFontBold size: 8.0f]];
-         whoseesLabel.text = @"WHO SEES THIS ------------------------------------------------------------";
+         whoseesLabel.text = @"WHO SEES THIS ---------------------------------------";
         [scrollView addSubview:whoseesLabel];
         
         NSMutableArray* mmddChoices = [[NSMutableArray alloc] init];
@@ -136,15 +139,15 @@
         [self.whoSeesMMDDYYPicker setToolbarStyle:UIBarStyleBlack];
         [scrollView addSubview:whoSeesMMDDYY];
         
-        continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
-        [continueButton setBackgroundColor:[UIColor whiteColor]];
-        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [continueButton setTitle:@"FINISH" forState:UIControlStateNormal];
-        [continueButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
-        [continueButton setSelected:NO];
-        continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [scrollView addSubview:continueButton];
+        finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [finishButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
+        [finishButton setBackgroundColor:[UIColor whiteColor]];
+        [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [finishButton setTitle:@"FINISH" forState:UIControlStateNormal];
+        [finishButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
+        [finishButton setSelected:NO];
+        finishButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [scrollView addSubview:finishButton];
         
         skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [skipButton setFrame:CGRectMake(20, scrollView.frame.size.height - 40, 60, 25)];
@@ -177,23 +180,23 @@
         btn.tag = 1;
         [btn setBackgroundColor:[UIColor blackColor]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        continueButton.tag++;
+        finishButton.tag++;
     } else {
         btn.tag = 0;
         [btn setBackgroundColor:[UIColor whiteColor]];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        continueButton.tag--;
+        finishButton.tag--;
     }
     
-    if (continueButton.tag>0) {
-        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [continueButton setEnabled:TRUE];
+    if (finishButton.tag>0) {
+        [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [finishButton setEnabled:TRUE];
         [skipButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [skipButton setEnabled:FALSE];
     }
     else {
-        [continueButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [continueButton setEnabled:FALSE];
+        [finishButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [finishButton setEnabled:FALSE];
         [skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [skipButton setEnabled:TRUE];
     }
