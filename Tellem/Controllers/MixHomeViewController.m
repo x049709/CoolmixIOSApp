@@ -35,9 +35,11 @@
 {
     NSMutableArray *menuList;
 }
-@synthesize sortedCircleNames,circleUserIds,sortedUserActivities,circleTableView,titleText, titleLabel,pageCircle,pushPayload;
+@synthesize sortedCircleNames,circleUserIds,sortedUserActivities,circleTableView,titleText, titleLabel,pageCircle,pushPayload,scrollView;
 @synthesize activityImageView,activityUserId,activityInitialComment,circleAvatar,netWorkTable;
 @synthesize posterNameLabel,postTimestampLabel,postLatestCommentsLabel,timeIntervalFormatter,pageIndex, tM;
+@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree;
+
 
 - (void)viewDidLoad
 {
@@ -77,6 +79,68 @@
     self.titleLabel.text = @"COOLMIX";
     self.titleLabel.textColor = [UIColor whiteColor];
     [self.titleLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    [self.view addSubview:titleLabel];
+
+    self.scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 60.0f,self.view.bounds.size.width,self.view.bounds.size.height);
+    [self.view addSubview:scrollView];
+    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+200)];
+    [scrollView setClipsToBounds:YES];
+    
+    self.quickAddLabel.frame = CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 150.0f);
+    quickAddLabel.textAlignment = NSTextAlignmentCenter;
+    quickAddLabel.text = @"QUICK ADD";
+    quickAddLabel.textColor = [UIColor whiteColor];
+    [quickAddLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    quickAddLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
+    [self.scrollView addSubview:quickAddLabel];
+
+    self.customGiftLabel.frame = CGRectMake(15.0f, 170.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    customGiftLabel.textAlignment = NSTextAlignmentCenter;
+    customGiftLabel.text = @"CUSTOM GIFT CIRCLE";
+    customGiftLabel.textColor = [UIColor whiteColor];
+    [customGiftLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    customGiftLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
+    [self.scrollView addSubview:customGiftLabel];
+    
+    self.giftSuggestLabel.frame = CGRectMake(15.0f, 230.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    giftSuggestLabel.textAlignment = NSTextAlignmentCenter;
+    giftSuggestLabel.text = @"GIFT SUGGESTIONS";
+    giftSuggestLabel.textColor = [UIColor whiteColor];
+    [giftSuggestLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    giftSuggestLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
+    [self.scrollView addSubview:giftSuggestLabel];
+    
+    self.groceryXChngLabel.frame = CGRectMake(15.0f, 290.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    groceryXChngLabel.textAlignment = NSTextAlignmentCenter;
+    groceryXChngLabel.text = @"GLOBAL GROCERY EXCHANGE";
+    groceryXChngLabel.textColor = [UIColor whiteColor];
+    [groceryXChngLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    groceryXChngLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grocery_exchange.png"]];
+    [self.scrollView addSubview:groceryXChngLabel];
+    
+    self.customLabelOne.frame = CGRectMake(15.0f, 350.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    customLabelOne.textAlignment = NSTextAlignmentCenter;
+    customLabelOne.text = @"CUSTOM OPTION ONE";
+    customLabelOne.textColor = [UIColor whiteColor];
+    [customLabelOne setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    customLabelOne.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
+    [self.scrollView addSubview:customLabelOne];
+    
+    self.customLabelTwo.frame = CGRectMake(15.0f, 410.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    customLabelTwo.textAlignment = NSTextAlignmentCenter;
+    customLabelTwo.text = @"CUSTOM OPTION TWO";
+    customLabelTwo.textColor = [UIColor whiteColor];
+    [customLabelTwo setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    customLabelTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
+    [self.scrollView addSubview:customLabelTwo];
+    
+    self.customLabelThree.frame = CGRectMake(15.0f, 470.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    customLabelThree.textAlignment = NSTextAlignmentCenter;
+    customLabelThree.text = @"CUSTOM OPTION THREE";
+    customLabelThree.textColor = [UIColor whiteColor];
+    [customLabelThree setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    customLabelThree.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grocery_exchange.png"]];
+    [self.scrollView addSubview:customLabelThree];
     
 }
 
@@ -165,12 +229,17 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //MWLogDebug(@"\nMixHomeViewController didSelectRowAtIndexPath started.");
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Coolmix" bundle: nil];
-    MixGSRViewController *mixGSRViewController = [sb instantiateViewControllerWithIdentifier:@"MixGSRViewController"];
     
-    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    [self.navigationController pushViewController:mixGSRViewController animated:YES];
+    if (indexPath == 0) {
+        
+    }
+    else {
+        //MWLogDebug(@"\nMixHomeViewController didSelectRowAtIndexPath started.");
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Coolmix" bundle: nil];
+        MixGSRViewController *mixGSRViewController = [sb instantiateViewControllerWithIdentifier:@"MixGSRViewController"];
+        self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+        [self.navigationController pushViewController:mixGSRViewController animated:YES];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

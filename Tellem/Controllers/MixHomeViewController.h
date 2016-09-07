@@ -19,6 +19,7 @@
     
     UIWebView *webView;
 }
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITableView *netWorkTable;
 @property (nonatomic, strong) IBOutlet UINavigationItem *navItem;
 @property (nonatomic, retain) NSMutableArray *userCircle;
@@ -38,6 +39,23 @@
 @property (nonatomic, strong) UILabel *postLatestCommentsLabel;
 @property NSDictionary *pushPayload;
 @property TellemGlobals *tM;
-
+@property (weak, nonatomic) IBOutlet UILabel *quickAddLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
+@property (weak, nonatomic) IBOutlet UILabel *productLabel;
+@property (weak, nonatomic) IBOutlet UITextField *productDescription;
+@property (weak, nonatomic) IBOutlet UITextField *productURL;
+@property (weak, nonatomic) IBOutlet UITextField *productPrice;
+@property (weak, nonatomic) IBOutlet UITextField *productName;
+@property (weak, nonatomic) IBOutlet UILabel *productDesirability;
+@property (weak, nonatomic) IBOutlet UISwitch *productWant;
+@property (weak, nonatomic) IBOutlet UISwitch *productNeed;
+@property (weak, nonatomic) IBOutlet UISwitch *productLove;
+@property (weak, nonatomic) IBOutlet UIButton *productComplete;
+@property (weak, nonatomic) IBOutlet UILabel *customGiftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *giftSuggestLabel;
+@property (weak, nonatomic) IBOutlet UILabel *groceryXChngLabel;
+@property (weak, nonatomic) IBOutlet UILabel *customLabelOne;
+@property (weak, nonatomic) IBOutlet UILabel *customLabelTwo;
+@property (weak, nonatomic) IBOutlet UILabel *customLabelThree;
 
 @end
