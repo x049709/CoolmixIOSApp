@@ -377,18 +377,6 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="dkW-me-AGL" userLabel="Want">
-                                        <rect key="frame" x="8" y="172" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </switch>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="kjO-Ao-yLs" userLabel="Need">
-                                        <rect key="frame" x="57" y="172" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </switch>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="OXX-b9-Yfv" userLabel="Love">
-                                        <rect key="frame" x="102" y="172" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </switch>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hyB-wE-fg2" userLabel="Complete">
                                         <rect key="frame" x="226" y="173" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -463,12 +451,9 @@
                         <outlet property="productDesirability" destination="6Ia-gd-6oh" id="T6R-fI-yoH"/>
                         <outlet property="productImageView" destination="dHh-Ea-OzA" id="Opt-W7-eYp"/>
                         <outlet property="productLabel" destination="PqY-NM-95l" id="ilf-Px-WNs"/>
-                        <outlet property="productLove" destination="OXX-b9-Yfv" id="aW3-n9-hkP"/>
                         <outlet property="productName" destination="8J0-a1-iOD" id="4Kb-Hw-rJn"/>
-                        <outlet property="productNeed" destination="kjO-Ao-yLs" id="4r9-EM-dGb"/>
                         <outlet property="productPrice" destination="1tI-qz-fni" id="0IL-MW-Gci"/>
                         <outlet property="productURL" destination="0ug-lI-iSM" id="kVH-dz-dyj"/>
-                        <outlet property="productWant" destination="dkW-me-AGL" id="16Y-JP-6IG"/>
                         <outlet property="quickAddLabel" destination="S4J-TY-zDW" id="FFh-a7-AuY"/>
                         <outlet property="scrollView" destination="wwL-J4-cLF" id="52F-gV-VIf"/>
                         <outlet property="titleLabel" destination="RYj-iC-cUf" id="vnY-3m-vXK"/>

@@ -51,9 +51,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *productPrice;
 @property (weak, nonatomic) IBOutlet UITextField *productName;
 @property (weak, nonatomic) IBOutlet UILabel *productDesirability;
-@property (weak, nonatomic) IBOutlet UISwitch *productWant;
-@property (weak, nonatomic) IBOutlet UISwitch *productNeed;
-@property (weak, nonatomic) IBOutlet UISwitch *productLove;
 @property (weak, nonatomic) IBOutlet UIButton *productComplete;
 @property (weak, nonatomic) IBOutlet UILabel *customGiftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *giftSuggestLabel;
@@ -62,6 +59,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *customLabelTwo;
 @property (weak, nonatomic) IBOutlet UILabel *customLabelThree;
 @property (nonatomic, strong) TNRadioButtonGroup *desirabilityGroup;
-
+@property (nonatomic, strong) TNCircularRadioButtonData *needProduct;
+@property (nonatomic, strong) TNCircularRadioButtonData *wantProduct;
+@property (nonatomic, strong) TNCircularRadioButtonData *loveProduct;
 
 @end

@@ -40,7 +40,7 @@
 @synthesize posterNameLabel,postTimestampLabel,postLatestCommentsLabel,timeIntervalFormatter,pageIndex, tM;
 @synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree;
 @synthesize productImageView,productLabel,productDescription,productURL,productPrice,productName,
-    productDesirability,productWant,productNeed,productLove,productComplete,desirabilityGroup;
+    productDesirability,needProduct,wantProduct, loveProduct, productComplete,desirabilityGroup;
 
 - (void)viewDidLoad
 {
@@ -76,17 +76,18 @@
     self.titleLabel.layer.borderWidth = 1.0;
     self.titleLabel.layer.borderColor = [UIColor clearColor].CGColor;
     self.titleLabel.layer.backgroundColor =[UIColor blackColor].CGColor;
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.text = @"COOLMIX";
+    self.titleLabel.textAlignment = NSTextAlignmentRight;
+    NSString *mixTitle = [NSString stringWithFormat:@"%@\t", @"THE MIX"];
+    self.titleLabel.text = mixTitle;
     self.titleLabel.textColor = [UIColor whiteColor];
     [self.titleLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
     [self.view addSubview:titleLabel];
 
     self.scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 60.0f,self.view.bounds.size.width,self.view.bounds.size.height);
+    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+250)];
     [self.view addSubview:scrollView];
-    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+200)];
-    
-    self.quickAddLabel.frame = CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 200.0f);
+   
+    self.quickAddLabel.frame = CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 230.0f);
     self.quickAddLabel.textAlignment = NSTextAlignmentCenter;
     self.quickAddLabel.textColor = [UIColor whiteColor];
     [self.quickAddLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
@@ -133,6 +134,7 @@
     self.productPrice.frame = CGRectMake(230, 100, 70, 30.0f);
     self.productPrice.backgroundColor = [UIColor whiteColor];
     [self.productPrice setTextColor:[UIColor blackColor]];
+    self.productPrice.textAlignment = NSTextAlignmentCenter;
     [self.productPrice setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
     [self.productPrice setBorderStyle:UITextBorderStyleNone];
     self.productPrice.placeholder = @"$0.00";
@@ -150,7 +152,7 @@
     self.productDescription.userInteractionEnabled=YES;
     [self.scrollView addSubview:self.productDescription];
     
-    self.productDesirability.frame = CGRectMake(30.0f, 170.0f, sVWidth -200.0f, 30.0f);
+    self.productDesirability.frame = CGRectMake(25.0f, 180.0f, sVWidth -200.0f, 30.0f);
     self.productDesirability.textAlignment = NSTextAlignmentCenter;
     self.productDesirability.text = @"LEVEL OF DESIRE";
     [self.productDesirability setTextColor:[UIColor whiteColor]];
@@ -159,6 +161,18 @@
     [self.scrollView addSubview:self.productDesirability];
     
     [self createDesirabilityGroup];
+    
+    //self.productComplete = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.productComplete.frame = CGRectMake(255, 185, 45, 40);
+    [self.productComplete setBackgroundColor:[UIColor whiteColor]];
+    [self.productComplete setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.productComplete setTitle:@"GO!" forState:UIControlStateNormal];
+    [self.productComplete.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+    [self.productComplete setSelected:NO];
+    self.productComplete.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [self.scrollView addSubview:self.productComplete];
+    
+
     
     self.customGiftLabel.frame = CGRectMake(15.0f, 250.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customGiftLabel.textAlignment = NSTextAlignmentCenter;
@@ -211,35 +225,51 @@
 }
 
 - (void)createDesirabilityGroup {
-    TNCircularRadioButtonData *maleData = [TNCircularRadioButtonData new];
-    maleData.labelText = @"Male";
-    maleData.identifier = @"male";
-    maleData.selected = YES;
-    [maleData setCircleActiveColor:[UIColor blueColor]];
-    [maleData setCirclePassiveColor:[UIColor greenColor]];
-    [maleData setBorderActiveColor:[UIColor blackColor]];
-    [maleData setBorderPassiveColor:[UIColor redColor]];
-    [maleData setLabelActiveColor:[UIColor blackColor]];
-    [maleData setLabelPassiveColor:[UIColor redColor]];
+    self.needProduct = [TNCircularRadioButtonData new];
+    self.needProduct.labelText = @"NEED";
+    self.needProduct.identifier = @"NEED";
+    self.needProduct.selected = YES;
+    self.needProduct.borderRadius = 10;
+    self.needProduct.circleRadius = 5;
+    [self.needProduct setCircleActiveColor:[UIColor greenColor]];
+    [self.needProduct setCirclePassiveColor:[UIColor whiteColor]];
+    [self.needProduct setBorderActiveColor:[UIColor whiteColor]];
+    [self.needProduct setBorderPassiveColor:[UIColor whiteColor]];
+    [self.needProduct setLabelActiveColor:[UIColor greenColor]];
+    [self.needProduct setLabelPassiveColor:[UIColor whiteColor]];
     
-    TNCircularRadioButtonData *femaleData = [TNCircularRadioButtonData new];
-    femaleData.labelText = @"Female";
-    femaleData.identifier = @"female";
-    femaleData.selected = NO;
-    femaleData.borderRadius = 12;
-    femaleData.circleRadius = 5;
-    femaleData.circleActiveColor = [UIColor blueColor];
-    femaleData.circlePassiveColor = [UIColor greenColor];
-    femaleData.borderActiveColor = [UIColor blackColor];
-    femaleData.borderPassiveColor = [UIColor redColor];
-    femaleData.labelActiveColor = [UIColor blackColor];
-    femaleData.labelPassiveColor = [UIColor redColor];
+    self.wantProduct = [TNCircularRadioButtonData new];
+    self.wantProduct.labelText = @"WANT";
+    self.wantProduct.identifier = @"WANT";
+    self.wantProduct.selected = NO;
+    self.wantProduct.borderRadius = 10;
+    self.wantProduct.circleRadius = 5;
+    self.wantProduct.circleActiveColor = [UIColor greenColor];
+    self.wantProduct.circlePassiveColor = [UIColor whiteColor];
+    self.wantProduct.borderActiveColor = [UIColor whiteColor];
+    self.wantProduct.borderPassiveColor = [UIColor whiteColor];
+    self.wantProduct.labelActiveColor = [UIColor greenColor];
+    self.wantProduct.labelPassiveColor = [UIColor whiteColor];
     
-    self.desirabilityGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[maleData, femaleData] layout:TNRadioButtonGroupLayoutHorizontal];
-    self.desirabilityGroup.identifier = @"Sex group";
+    self.loveProduct = [TNCircularRadioButtonData new];
+    self.loveProduct.labelText = @"LOVE";
+    self.loveProduct.identifier = @"LOVE";
+    self.loveProduct.selected = NO;
+    self.loveProduct.borderRadius = 10;
+    self.loveProduct.circleRadius = 5;
+    self.loveProduct.circleActiveColor = [UIColor greenColor];
+    self.loveProduct.circlePassiveColor = [UIColor whiteColor];
+    self.loveProduct.borderActiveColor = [UIColor whiteColor];
+    self.loveProduct.borderPassiveColor = [UIColor whiteColor];
+    self.loveProduct.labelActiveColor = [UIColor greenColor];
+    self.loveProduct.labelPassiveColor = [UIColor whiteColor];
+    
+    self.desirabilityGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[self.needProduct, self.wantProduct, self.loveProduct] layout:TNRadioButtonGroupLayoutHorizontal];
+    self.desirabilityGroup.identifier = @"Desirability";
     [self.desirabilityGroup create];
+    self.desirabilityGroup.marginBetweenItems = 0;
     int sVWidth = self.scrollView.frame.size.width;
-    self.desirabilityGroup.frame = CGRectMake(30.0f, 210.0f, sVWidth -200.0f, 30.0f);
+    self.desirabilityGroup.frame = CGRectMake(30.0f, 210.0f, sVWidth -120.0f, 30.0f);
 
     [self.scrollView addSubview:self.desirabilityGroup];
     

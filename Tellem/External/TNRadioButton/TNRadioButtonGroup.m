@@ -29,7 +29,7 @@ NSString *const SELECTED_RADIO_BUTTON_CHANGED = @"selectedRadioButtonChanged";
     if (self) {
         self.radioButtonData = radioButtonData;
         self.layout = layout;
-        self.marginBetweenItems = 15;
+        self.marginBetweenItems = 10;
 		self.itemsInsets = UIEdgeInsetsZero;
         self.multipleOptions = NO;
     }
@@ -76,10 +76,10 @@ NSString *const SELECTED_RADIO_BUTTON_CHANGED = @"selectedRadioButtonChanged";
             radioButton = [[TNCircularRadioButton alloc] initWithData:rData];
         }else if( [data isKindOfClass:[TNRectangularRadioButtonData class]] ){
             TNRectangularRadioButtonData *rData = (TNRectangularRadioButtonData *)data;
-            rData.borderActiveColor = self.controlActiveColor;
-            rData.borderPassiveColor = self.controlPassiveColor;
-            rData.rectangleActiveColor = self.controlActiveColor;
-            rData.rectanglePassiveColor = self.controlPassiveColor;
+            //rData.borderActiveColor = self.controlActiveColor;
+            //rData.borderPassiveColor = self.controlPassiveColor;
+            //rData.rectangleActiveColor = self.controlActiveColor;
+            //rData.rectanglePassiveColor = self.controlPassiveColor;
             radioButton = [[TNRectangularRadioButton alloc] initWithData:rData];
         }else if( [data isKindOfClass:[TNImageRadioButtonData class]] ){
             radioButton = [[TNImageRadioButton alloc] initWithData:(TNImageRadioButtonData *)data];
