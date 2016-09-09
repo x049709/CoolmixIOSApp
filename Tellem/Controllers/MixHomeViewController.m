@@ -39,7 +39,8 @@
 @synthesize activityImageView,activityUserId,activityInitialComment,circleAvatar,netWorkTable;
 @synthesize posterNameLabel,postTimestampLabel,postLatestCommentsLabel,timeIntervalFormatter,pageIndex, tM;
 @synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree;
-
+@synthesize productImageView,productLabel,productDescription,productURL,productPrice,productName,
+    productDesirability,productWant,productNeed,productLove,productComplete,desirabilityGroup;
 
 - (void)viewDidLoad
 {
@@ -84,17 +85,82 @@
     self.scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 60.0f,self.view.bounds.size.width,self.view.bounds.size.height);
     [self.view addSubview:scrollView];
     [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+200)];
-    [scrollView setClipsToBounds:YES];
     
-    self.quickAddLabel.frame = CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 150.0f);
-    quickAddLabel.textAlignment = NSTextAlignmentCenter;
-    quickAddLabel.text = @"QUICK ADD";
-    quickAddLabel.textColor = [UIColor whiteColor];
-    [quickAddLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
-    quickAddLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
-    [self.scrollView addSubview:quickAddLabel];
+    self.quickAddLabel.frame = CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 200.0f);
+    self.quickAddLabel.textAlignment = NSTextAlignmentCenter;
+    self.quickAddLabel.textColor = [UIColor whiteColor];
+    [self.quickAddLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    self.quickAddLabel.backgroundColor = [UIColor blackColor];
+    [self.scrollView addSubview:self.quickAddLabel];
 
-    self.customGiftLabel.frame = CGRectMake(15.0f, 170.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.productImageView.frame = CGRectMake(10.0f, 5.0f, 80.0f, 80.0f);
+    self.productImageView.layer.cornerRadius = 40.0;
+    self.productImageView.layer.borderWidth = 1.0;
+    [self.productImageView setImage:[UIImage imageNamed:@"user.png"]];
+    [self.quickAddLabel addSubview:self.productImageView];
+    
+    self.productLabel.frame = CGRectMake(95.0f, 5.0f, self.quickAddLabel.frame.size.width - 100.0f, 40.0f);
+    [self.productLabel setTextColor:[UIColor whiteColor]];
+    [self.productLabel setBackgroundColor:[UIColor blackColor]];
+    [self.productLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
+    self.productLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.productLabel.numberOfLines = 0;
+    self.productLabel.text = @"SEE SOMETHING YOU WANT?\nADD IT TO A REGISTRY.";
+    self.productLabel.textAlignment = NSTextAlignmentRight;
+    [self.quickAddLabel addSubview:self.productLabel];
+
+    int sVWidth = self.scrollView.frame.size.width;
+    self.productName.frame = CGRectMake(130.0f, 60.0f, sVWidth - 150.0f, 30.0f);
+    self.productName.backgroundColor = [UIColor whiteColor];
+    [self.productName setTextColor:[UIColor blackColor]];
+    [self.productName setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+    self.productName.placeholder = @"Name of product";
+    [self.productName setBorderStyle:UITextBorderStyleNone];
+    self.productName.delegate=self;
+    self.productName.userInteractionEnabled=YES;
+    [self.scrollView addSubview:self.productName];
+    
+    self.productURL.frame = CGRectMake(30.0f, 100.0f, sVWidth - 130.0f, 30.0f);
+    self.productURL.backgroundColor = [UIColor whiteColor];
+    [self.productURL setTextColor:[UIColor blackColor]];
+    [self.productURL setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+    [self.productURL setBorderStyle:UITextBorderStyleNone];
+    self.productURL.placeholder = @"Product link (optional)";
+    self.productURL.delegate=self;
+    self.productURL.userInteractionEnabled=YES;
+    [self.scrollView addSubview:self.productURL];
+    
+    self.productPrice.frame = CGRectMake(230, 100, 70, 30.0f);
+    self.productPrice.backgroundColor = [UIColor whiteColor];
+    [self.productPrice setTextColor:[UIColor blackColor]];
+    [self.productPrice setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+    [self.productPrice setBorderStyle:UITextBorderStyleNone];
+    self.productPrice.placeholder = @"$0.00";
+    self.productPrice.delegate=self;
+    self.productPrice.userInteractionEnabled=YES;
+    [self.scrollView addSubview:self.productPrice];
+    
+    self.productDescription.frame = CGRectMake(30.0f, 140.0f, sVWidth - 50.0f, 30.0f);
+    self.productDescription.backgroundColor = [UIColor whiteColor];
+    [self.productDescription setTextColor:[UIColor blackColor]];
+    [self.productDescription setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+    [self.productDescription setBorderStyle:UITextBorderStyleNone];
+    self.productDescription.placeholder = @"Product description";
+    self.productDescription.delegate=self;
+    self.productDescription.userInteractionEnabled=YES;
+    [self.scrollView addSubview:self.productDescription];
+    
+    self.productDesirability.frame = CGRectMake(30.0f, 170.0f, sVWidth -200.0f, 30.0f);
+    self.productDesirability.textAlignment = NSTextAlignmentCenter;
+    self.productDesirability.text = @"LEVEL OF DESIRE";
+    [self.productDesirability setTextColor:[UIColor whiteColor]];
+    [self.productDesirability setBackgroundColor:[UIColor blackColor]];
+    [productDesirability setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+    [self.scrollView addSubview:self.productDesirability];
+    
+    [self createDesirabilityGroup];
+    
+    self.customGiftLabel.frame = CGRectMake(15.0f, 250.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customGiftLabel.textAlignment = NSTextAlignmentCenter;
     customGiftLabel.text = @"CUSTOM GIFT CIRCLE";
     customGiftLabel.textColor = [UIColor whiteColor];
@@ -102,7 +168,7 @@
     customGiftLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
     [self.scrollView addSubview:customGiftLabel];
     
-    self.giftSuggestLabel.frame = CGRectMake(15.0f, 230.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.giftSuggestLabel.frame = CGRectMake(15.0f, 310.0f, self.view.frame.size.width - 30.0f, 50.0f);
     giftSuggestLabel.textAlignment = NSTextAlignmentCenter;
     giftSuggestLabel.text = @"GIFT SUGGESTIONS";
     giftSuggestLabel.textColor = [UIColor whiteColor];
@@ -110,7 +176,7 @@
     giftSuggestLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
     [self.scrollView addSubview:giftSuggestLabel];
     
-    self.groceryXChngLabel.frame = CGRectMake(15.0f, 290.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.groceryXChngLabel.frame = CGRectMake(15.0f, 370.0f, self.view.frame.size.width - 30.0f, 50.0f);
     groceryXChngLabel.textAlignment = NSTextAlignmentCenter;
     groceryXChngLabel.text = @"GLOBAL GROCERY EXCHANGE";
     groceryXChngLabel.textColor = [UIColor whiteColor];
@@ -118,7 +184,7 @@
     groceryXChngLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grocery_exchange.png"]];
     [self.scrollView addSubview:groceryXChngLabel];
     
-    self.customLabelOne.frame = CGRectMake(15.0f, 350.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.customLabelOne.frame = CGRectMake(15.0f, 420.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelOne.textAlignment = NSTextAlignmentCenter;
     customLabelOne.text = @"CUSTOM OPTION ONE";
     customLabelOne.textColor = [UIColor whiteColor];
@@ -126,7 +192,7 @@
     customLabelOne.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
     [self.scrollView addSubview:customLabelOne];
     
-    self.customLabelTwo.frame = CGRectMake(15.0f, 410.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.customLabelTwo.frame = CGRectMake(15.0f, 480.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelTwo.textAlignment = NSTextAlignmentCenter;
     customLabelTwo.text = @"CUSTOM OPTION TWO";
     customLabelTwo.textColor = [UIColor whiteColor];
@@ -134,7 +200,7 @@
     customLabelTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
     [self.scrollView addSubview:customLabelTwo];
     
-    self.customLabelThree.frame = CGRectMake(15.0f, 470.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.customLabelThree.frame = CGRectMake(15.0f, 540.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelThree.textAlignment = NSTextAlignmentCenter;
     customLabelThree.text = @"CUSTOM OPTION THREE";
     customLabelThree.textColor = [UIColor whiteColor];
@@ -143,6 +209,43 @@
     [self.scrollView addSubview:customLabelThree];
     
 }
+
+- (void)createDesirabilityGroup {
+    TNCircularRadioButtonData *maleData = [TNCircularRadioButtonData new];
+    maleData.labelText = @"Male";
+    maleData.identifier = @"male";
+    maleData.selected = YES;
+    [maleData setCircleActiveColor:[UIColor blueColor]];
+    [maleData setCirclePassiveColor:[UIColor greenColor]];
+    [maleData setBorderActiveColor:[UIColor blackColor]];
+    [maleData setBorderPassiveColor:[UIColor redColor]];
+    [maleData setLabelActiveColor:[UIColor blackColor]];
+    [maleData setLabelPassiveColor:[UIColor redColor]];
+    
+    TNCircularRadioButtonData *femaleData = [TNCircularRadioButtonData new];
+    femaleData.labelText = @"Female";
+    femaleData.identifier = @"female";
+    femaleData.selected = NO;
+    femaleData.borderRadius = 12;
+    femaleData.circleRadius = 5;
+    femaleData.circleActiveColor = [UIColor blueColor];
+    femaleData.circlePassiveColor = [UIColor greenColor];
+    femaleData.borderActiveColor = [UIColor blackColor];
+    femaleData.borderPassiveColor = [UIColor redColor];
+    femaleData.labelActiveColor = [UIColor blackColor];
+    femaleData.labelPassiveColor = [UIColor redColor];
+    
+    self.desirabilityGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[maleData, femaleData] layout:TNRadioButtonGroupLayoutHorizontal];
+    self.desirabilityGroup.identifier = @"Sex group";
+    [self.desirabilityGroup create];
+    int sVWidth = self.scrollView.frame.size.width;
+    self.desirabilityGroup.frame = CGRectMake(30.0f, 210.0f, sVWidth -200.0f, 30.0f);
+
+    [self.scrollView addSubview:self.desirabilityGroup];
+    
+}
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -248,6 +351,12 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

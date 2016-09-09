@@ -14,8 +14,12 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "TellemUtility.h"
 #import "DataReceiver.h"
+#import "TNCircularRadioButton.h"
+#import "TNRadioButtonGroup.h"
 
-@interface MixHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>{
+
+
+@interface MixHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate>{
     
     UIWebView *webView;
 }
@@ -57,5 +61,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *customLabelOne;
 @property (weak, nonatomic) IBOutlet UILabel *customLabelTwo;
 @property (weak, nonatomic) IBOutlet UILabel *customLabelThree;
+@property (nonatomic, strong) TNRadioButtonGroup *desirabilityGroup;
+
 
 @end
