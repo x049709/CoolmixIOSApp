@@ -38,7 +38,7 @@
 @synthesize sortedCircleNames,circleUserIds,sortedUserActivities,circleTableView,titleText, titleLabel,pageCircle,pushPayload,scrollView;
 @synthesize activityImageView,activityUserId,activityInitialComment,circleAvatar,netWorkTable;
 @synthesize posterNameLabel,postTimestampLabel,postLatestCommentsLabel,timeIntervalFormatter,pageIndex, tM;
-@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree;
+@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree,tellemAddToRegistry;
 @synthesize productImageView,productLabel,productDescription,productURL,productPrice,productName,
     productDesirability,needProduct,wantProduct, loveProduct, productComplete,desirabilityGroup;
 
@@ -140,6 +140,7 @@
     self.productPrice.placeholder = @"$0.00";
     self.productPrice.delegate=self;
     self.productPrice.userInteractionEnabled=YES;
+    self.productPrice.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     [self.scrollView addSubview:self.productPrice];
     
     self.productDescription.frame = CGRectMake(30.0f, 140.0f, sVWidth - 50.0f, 30.0f);
@@ -166,7 +167,7 @@
     self.productComplete.frame = CGRectMake(255, 185, 45, 40);
     [self.productComplete setBackgroundColor:[UIColor whiteColor]];
     [self.productComplete setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.productComplete setTitle:@"GO!" forState:UIControlStateNormal];
+    [self.productComplete setTitle:@"ADD" forState:UIControlStateNormal];
     [self.productComplete.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
     [self.productComplete setSelected:NO];
     self.productComplete.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -198,7 +199,7 @@
     groceryXChngLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grocery_exchange.png"]];
     [self.scrollView addSubview:groceryXChngLabel];
     
-    self.customLabelOne.frame = CGRectMake(15.0f, 420.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.customLabelOne.frame = CGRectMake(15.0f, 430.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelOne.textAlignment = NSTextAlignmentCenter;
     customLabelOne.text = @"CUSTOM OPTION ONE";
     customLabelOne.textColor = [UIColor whiteColor];
@@ -206,7 +207,7 @@
     customLabelOne.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
     [self.scrollView addSubview:customLabelOne];
     
-    self.customLabelTwo.frame = CGRectMake(15.0f, 480.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.customLabelTwo.frame = CGRectMake(15.0f, 490.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelTwo.textAlignment = NSTextAlignmentCenter;
     customLabelTwo.text = @"CUSTOM OPTION TWO";
     customLabelTwo.textColor = [UIColor whiteColor];
@@ -214,7 +215,7 @@
     customLabelTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
     [self.scrollView addSubview:customLabelTwo];
     
-    self.customLabelThree.frame = CGRectMake(15.0f, 540.0f, self.view.frame.size.width - 30.0f, 50.0f);
+    self.customLabelThree.frame = CGRectMake(15.0f, 550.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelThree.textAlignment = NSTextAlignmentCenter;
     customLabelThree.text = @"CUSTOM OPTION THREE";
     customLabelThree.textColor = [UIColor whiteColor];
@@ -270,11 +271,30 @@
     self.desirabilityGroup.marginBetweenItems = 0;
     int sVWidth = self.scrollView.frame.size.width;
     self.desirabilityGroup.frame = CGRectMake(30.0f, 210.0f, sVWidth -120.0f, 30.0f);
+    
+    
 
     [self.scrollView addSubview:self.desirabilityGroup];
     
 }
 
+- (IBAction)completeBtnTouched:(id)sender {
+
+    tellemAddToRegistry=[[TellemAddToRegistry alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
+    //[tellemAddToRegistry.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
+    //[tellemAddToRegistry.signinButton addTarget:self action:@selector(submitSignIn:) forControlEvents:UIControlEventTouchUpInside];
+    //[tellemAddToRegistry.registerButton addTarget:self action:@selector(showRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
+    //[tellemAddToRegistry.forgotPasswordButton addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:blurEffectView];
+ 
+    [self.view addSubview:tellemAddToRegistry];
+
+}
 
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -380,7 +380,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hyB-wE-fg2" userLabel="Complete">
                                         <rect key="frame" x="226" y="173" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="ADD"/>
+                                        <connections>
+                                            <action selector="completeBtnTouched:" destination="yQE-2C-TTp" eventType="touchUpInside" id="Hfk-k5-gJF"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bVy-6q-hx9">
                                         <rect key="frame" x="119" y="316" width="42" height="21"/>

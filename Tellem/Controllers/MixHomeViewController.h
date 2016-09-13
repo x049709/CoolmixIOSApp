@@ -16,7 +16,7 @@
 #import "DataReceiver.h"
 #import "TNCircularRadioButton.h"
 #import "TNRadioButtonGroup.h"
-
+#import "TellemAddToRegistry.h"
 
 
 @interface MixHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate>{
@@ -62,5 +62,9 @@
 @property (nonatomic, strong) TNCircularRadioButtonData *needProduct;
 @property (nonatomic, strong) TNCircularRadioButtonData *wantProduct;
 @property (nonatomic, strong) TNCircularRadioButtonData *loveProduct;
+@property (nonatomic, strong) TellemAddToRegistry *tellemAddToRegistry;
+
+
+- (IBAction)completeBtnTouched:(id)sender;
 
 @end
