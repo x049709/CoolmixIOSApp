@@ -20,6 +20,7 @@
 @interface MixHomeViewController ()
 {
     UITextField *addCircleTextField;
+    
 }
 @property (nonatomic, strong) PAPSettingsActionSheetDelegate *settingsActionSheetDelegate;
 @property (nonatomic) NSArray *sortedCircleNames;
@@ -38,9 +39,9 @@
 @synthesize sortedCircleNames,circleUserIds,sortedUserActivities,circleTableView,titleText, titleLabel,pageCircle,pushPayload,scrollView;
 @synthesize activityImageView,activityUserId,activityInitialComment,circleAvatar,netWorkTable;
 @synthesize posterNameLabel,postTimestampLabel,postLatestCommentsLabel,timeIntervalFormatter,pageIndex, tM;
-@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree,tellemAddToRegistry;
+@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree,tellemAddToRegistry,tellemBuildCustomRegistry;
 @synthesize productImageView,productLabel,productDescription,productURL,productPrice,productName,
-    productDesirability,needProduct,wantProduct, loveProduct, productComplete,desirabilityGroup;
+productDesirability,needProduct,wantProduct, loveProduct, productComplete,desirabilityGroup,blurEffectView;
 
 - (void)viewDidLoad
 {
@@ -172,32 +173,34 @@
     [self.productComplete setSelected:NO];
     self.productComplete.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.scrollView addSubview:self.productComplete];
-    
-
-    
+        
     self.customGiftLabel.frame = CGRectMake(15.0f, 250.0f, self.view.frame.size.width - 30.0f, 50.0f);
-    customGiftLabel.textAlignment = NSTextAlignmentCenter;
-    customGiftLabel.text = @"CUSTOM GIFT CIRCLE";
-    customGiftLabel.textColor = [UIColor whiteColor];
-    [customGiftLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
-    customGiftLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
+    self.customGiftLabel.textAlignment = NSTextAlignmentCenter;
+    self.customGiftLabel.text = @"BUILD A CUSTOM REGISTRY";
+    self.customGiftLabel.textColor = [UIColor whiteColor];
+    [self.customGiftLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    self.customGiftLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"custom_gift_circle_more.png"]];
+    [self.customGiftLabel setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *customGiftLabelTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customGiftLabelTouched:)];
+    customGiftLabelTouch.numberOfTapsRequired = 1;
+    [self.customGiftLabel addGestureRecognizer:customGiftLabelTouch];
     [self.scrollView addSubview:customGiftLabel];
     
     self.giftSuggestLabel.frame = CGRectMake(15.0f, 310.0f, self.view.frame.size.width - 30.0f, 50.0f);
-    giftSuggestLabel.textAlignment = NSTextAlignmentCenter;
-    giftSuggestLabel.text = @"GIFT SUGGESTIONS";
-    giftSuggestLabel.textColor = [UIColor whiteColor];
-    [giftSuggestLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
-    giftSuggestLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
-    [self.scrollView addSubview:giftSuggestLabel];
+    self.giftSuggestLabel.textAlignment = NSTextAlignmentCenter;
+    self.giftSuggestLabel.text = @"GIFT SUGGESTIONS";
+    self.giftSuggestLabel.textColor = [UIColor whiteColor];
+    [self.giftSuggestLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    self.giftSuggestLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gifting_suggestions.png"]];
+    [self.scrollView addSubview:self.giftSuggestLabel];
     
     self.groceryXChngLabel.frame = CGRectMake(15.0f, 370.0f, self.view.frame.size.width - 30.0f, 50.0f);
-    groceryXChngLabel.textAlignment = NSTextAlignmentCenter;
-    groceryXChngLabel.text = @"GLOBAL GROCERY EXCHANGE";
-    groceryXChngLabel.textColor = [UIColor whiteColor];
-    [groceryXChngLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
-    groceryXChngLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grocery_exchange.png"]];
-    [self.scrollView addSubview:groceryXChngLabel];
+    self.groceryXChngLabel.textAlignment = NSTextAlignmentCenter;
+    self.groceryXChngLabel.text = @"GLOBAL GROCERY EXCHANGE";
+    self.groceryXChngLabel.textColor = [UIColor whiteColor];
+    [self.groceryXChngLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
+    self.groceryXChngLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grocery_exchange.png"]];
+    [self.scrollView addSubview:self.groceryXChngLabel];
     
     self.customLabelOne.frame = CGRectMake(15.0f, 430.0f, self.view.frame.size.width - 30.0f, 50.0f);
     customLabelOne.textAlignment = NSTextAlignmentCenter;
@@ -271,8 +274,6 @@
     self.desirabilityGroup.marginBetweenItems = 0;
     int sVWidth = self.scrollView.frame.size.width;
     self.desirabilityGroup.frame = CGRectMake(30.0f, 210.0f, sVWidth -120.0f, 30.0f);
-    
-    
 
     [self.scrollView addSubview:self.desirabilityGroup];
     
@@ -281,26 +282,47 @@
 - (IBAction)completeBtnTouched:(id)sender {
 
     tellemAddToRegistry=[[TellemAddToRegistry alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
-    //[tellemAddToRegistry.removeViewButton addTarget:self action:@selector(removeView:) forControlEvents:UIControlEventTouchUpInside];
-    //[tellemAddToRegistry.signinButton addTarget:self action:@selector(submitSignIn:) forControlEvents:UIControlEventTouchUpInside];
-    //[tellemAddToRegistry.registerButton addTarget:self action:@selector(showRegisterNewUser:) forControlEvents:UIControlEventTouchUpInside];
-    //[tellemAddToRegistry.forgotPasswordButton addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [tellemAddToRegistry.removeViewButton addTarget:self action:@selector(removeRegistryAddView:) forControlEvents:UIControlEventTouchUpInside];
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    self.blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView.frame = self.view.bounds;
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:blurEffectView];
- 
     [self.view addSubview:tellemAddToRegistry];
 
+}
+
+- (void)removeRegistryAddView:(id)sender {
+    [self.tellemAddToRegistry removeFromSuperview];
+    [self.blurEffectView removeFromSuperview];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [tellemAddToRegistry removeFromSuperview];
+    [tellemBuildCustomRegistry removeFromSuperview];
 }
+
+
+- (void)customGiftLabelTouched:(id)sender {
+    tellemBuildCustomRegistry=[[TellemBuildCustomRegistry alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
+    [tellemBuildCustomRegistry.removeViewButton addTarget:self action:@selector(removeCustomGiftView:) forControlEvents:UIControlEventTouchUpInside];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    self.blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:blurEffectView];
+    [self.view addSubview:tellemBuildCustomRegistry];
+}
+
+- (void)removeCustomGiftView:(id)sender {
+    [self.tellemBuildCustomRegistry removeFromSuperview];
+    [self.blurEffectView removeFromSuperview];
+}
+
+
 
 - (void)settingsButtonAction:(id)sender
 {

@@ -17,7 +17,7 @@
 #import "TNCircularRadioButton.h"
 #import "TNRadioButtonGroup.h"
 #import "TellemAddToRegistry.h"
-
+#import "TellemBuildCustomRegistry.h"
 
 @interface MixHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate>{
     
@@ -63,6 +63,9 @@
 @property (nonatomic, strong) TNCircularRadioButtonData *wantProduct;
 @property (nonatomic, strong) TNCircularRadioButtonData *loveProduct;
 @property (nonatomic, strong) TellemAddToRegistry *tellemAddToRegistry;
+@property (nonatomic, strong) TellemBuildCustomRegistry *tellemBuildCustomRegistry;
+@property UIVisualEffectView *blurEffectView;
+
 
 
 - (IBAction)completeBtnTouched:(id)sender;

@@ -18,12 +18,9 @@
 @synthesize inputBackgroundImageView;
 @synthesize inputBackgroundImage;
 @synthesize removeViewButton;
-@synthesize inputUserName;
-@synthesize inputPassword;
-@synthesize signinButton;
-@synthesize registerButton;
-@synthesize forgotPasswordButton,guestButton;
-
+@synthesize currentRegistryButton;
+@synthesize futureRegistryButton;
+@synthesize pushToFriendsButton;
 
 #pragma mark - Initialization
 
@@ -52,80 +49,34 @@
         [removeViewButton setSelected:NO];
         [self addSubview:removeViewButton];
         
-        UILabel *signinLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, scrollView.frame.size.width - 40, 30)];
-        [signinLabel setTextColor:[UIColor whiteColor]];
-        [signinLabel setBackgroundColor:[UIColor blackColor]];
-        [signinLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
-        signinLabel.text = @"WELCOME BACK! LOG IN HERE.";
-        signinLabel.textAlignment = NSTextAlignmentCenter;
-        [scrollView addSubview:signinLabel];
-        
-        UILabel *userLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, scrollView.frame.size.width - 40, 20)];
-        [userLabel setTextColor:[UIColor blackColor]];
-        [userLabel setBackgroundColor:[UIColor clearColor]];
-        [userLabel setFont:[UIFont fontWithName: kFontBold size: 10.0f]];
-        userLabel.text = @"EMAIL ADDRESS";
-        [scrollView addSubview:userLabel];
-        
-        inputUserName = [[UITextField alloc] initWithFrame:CGRectMake(20, 110, scrollView.frame.size.width - 40, 30)];
-        inputUserName.backgroundColor = [UIColor whiteColor];
-        inputUserName.layer.borderWidth = 0.5;
-        [inputUserName setTextColor:[UIColor blackColor]];
-        [inputUserName setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        inputUserName.delegate=self;
-        inputUserName.userInteractionEnabled=YES;
-        //inputUserName.placeholder = @"Enter email address";
-        //UIToolbar *inputUserNameToolBar = [self configureKeyboardToolbars:inputUserName];
-        //inputUserName.inputAccessoryView = inputUserNameToolBar;
-        [scrollView addSubview:inputUserName];
+        currentRegistryButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [currentRegistryButton setFrame:CGRectMake(20, 60, scrollView.frame.size.width - 40, 30.0)];
+        [currentRegistryButton setBackgroundColor:[UIColor blackColor]];
+        [currentRegistryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [currentRegistryButton setTitle:@"ADD TO A CURRENT REGISTRY" forState:UIControlStateNormal];
+        [currentRegistryButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [currentRegistryButton setSelected:NO];
+        [scrollView addSubview:currentRegistryButton];
 
-        UILabel *passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, (scrollView.frame.size.width - 40)/2, 20)];
-        [passwordLabel setTextColor:[UIColor blackColor]];
-        [passwordLabel setBackgroundColor:[UIColor clearColor]];
-        [passwordLabel setFont:[UIFont fontWithName: kFontBold size: 10.0f]];
-        passwordLabel.text = @"PASSWORD";
-        [scrollView addSubview:passwordLabel];
+        futureRegistryButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [futureRegistryButton setFrame:CGRectMake(20, 130, scrollView.frame.size.width - 40, 30.0)];
+        [futureRegistryButton setBackgroundColor:[UIColor blackColor]];
+        [futureRegistryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [futureRegistryButton setTitle:@"SAVE TO A NEW REGISTRY" forState:UIControlStateNormal];
+        [futureRegistryButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [futureRegistryButton setSelected:NO];
+        [scrollView addSubview:futureRegistryButton];
         
-        inputPassword = [[UITextField alloc]  initWithFrame:CGRectMake(20, 180, scrollView.frame.size.width - 40, 30)];
-        inputPassword.secureTextEntry = YES;
-        inputPassword.backgroundColor = [UIColor whiteColor];
-        inputPassword.layer.borderWidth = 0.5;
-        [inputPassword setTextColor:[UIColor blackColor]];
-        [inputPassword setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        inputPassword.delegate=self;
-        inputPassword.userInteractionEnabled=YES;
-        //UIToolbar *inputPasswordToolBar = [self configureKeyboardToolbars:inputPassword];
-        //inputPassword.inputAccessoryView = inputPasswordToolBar;
-        [scrollView addSubview:inputPassword];
+        pushToFriendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [pushToFriendsButton setFrame:CGRectMake(20, 200, scrollView.frame.size.width - 40, 30.0)];
+        [pushToFriendsButton setBackgroundColor:[UIColor blackColor]];
+        [pushToFriendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [pushToFriendsButton setTitle:@"PUSH TO FRIENDS" forState:UIControlStateNormal];
+        [pushToFriendsButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [pushToFriendsButton setSelected:NO];
+        [scrollView addSubview:pushToFriendsButton];
         
-        forgotPasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [forgotPasswordButton setFrame:CGRectMake(inputPassword.frame.size.width - 20, 160, 40, 20)];
-        [forgotPasswordButton setBackgroundColor:[UIColor whiteColor]];
-        [forgotPasswordButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [forgotPasswordButton setTitle:@"FORGOT?" forState:UIControlStateNormal];
-        [forgotPasswordButton.titleLabel setFont:[UIFont fontWithName:kFontThin size:10.0f]];
-        [forgotPasswordButton setSelected:NO];
-        forgotPasswordButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [scrollView addSubview:forgotPasswordButton];
         
-        signinButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [signinButton setFrame:CGRectMake(inputPassword.frame.size.width - 40, 230, 60, 25)];
-        [signinButton setBackgroundColor:[UIColor blackColor]];
-        [signinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [signinButton setTitle:@"LOGIN" forState:UIControlStateNormal];
-        [signinButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
-        [signinButton setSelected:NO];
-        signinButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        [scrollView addSubview:signinButton];
-        
-        registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [registerButton setFrame:CGRectMake(30, scrollView.frame.size.height +80, scrollView.frame.size.width, 30.0)];
-        [registerButton setBackgroundColor:[UIColor blackColor]];
-        [registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [registerButton setTitle:@"NEW TO COOLMIX? LET'S SIGN YOU UP!" forState:UIControlStateNormal];
-        [registerButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
-        [registerButton setSelected:NO];
-        [self addSubview:registerButton];
         
     }
     

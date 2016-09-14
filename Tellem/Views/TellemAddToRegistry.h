@@ -12,12 +12,9 @@
 @property (nonatomic, strong) UIImageView *inputBackgroundImageView;
 @property (nonatomic, strong) UIImage *inputBackgroundImage;
 @property (nonatomic, strong) UIButton *removeViewButton;
-@property (nonatomic, strong) UITextField *inputUserName;
-@property (nonatomic, strong) UITextField *inputPassword;
-@property (nonatomic, strong) UIButton *signinButton;
-@property (nonatomic, strong) UIButton *registerButton;
-@property (nonatomic, strong) UIButton *forgotPasswordButton;
-@property (nonatomic, strong) UIButton *guestButton;
+@property (nonatomic, strong) UIButton *currentRegistryButton;
+@property (nonatomic, strong) UIButton *pushToFriendsButton;
+@property (nonatomic, strong) UIButton *futureRegistryButton;
 
 - (id)initWithFrame:(CGRect)frame;
 
