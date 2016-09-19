@@ -14,7 +14,7 @@
 
 
 @implementation TellemBuildCustomRegistry
-@synthesize scrollView;
+@synthesize buildScrollView;
 @synthesize profileImageView, profileImageLabel;
 @synthesize profileImage;
 @synthesize removeViewButton;
@@ -27,84 +27,113 @@
 @synthesize entertainmentButton, lifestyleButton, techscienceButton;
 @synthesize artButton, gamingButton, foodButton;
 @synthesize fashionButton, outdoorsadventureButton;
+@synthesize quickAddLabel,productImageView,productLabel,productDescription,productURL,productPrice,productName,productComplete;
+
 
 #pragma mark - Initialization
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
         self.layer.cornerRadius = 0.0;
         self.layer.borderWidth = 0.0;
-        scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(30, 60, self.frame.size.width-60, self.frame.size.height-110)];
-        scrollView.layer.cornerRadius = 0.0;
-        scrollView.layer.masksToBounds = YES;
-        scrollView.layer.borderWidth = 0.5;
-        [scrollView setScrollEnabled:YES];
-        scrollView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:scrollView];
+        self.buildScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(10, 0, self.frame.size.width-20, self.frame.size.height)];
+        [self.buildScrollView setContentSize:CGSizeMake(self.buildScrollView.bounds.size.width, self.buildScrollView.bounds.size.height+250)];        
+        self.buildScrollView.layer.cornerRadius = 0.0;
+        self.buildScrollView.layer.masksToBounds = YES;
+        self.buildScrollView.layer.borderWidth = 0.0;
+        [self.buildScrollView setScrollEnabled:YES];
+        self.buildScrollView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:self.buildScrollView];
         
-        removeViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [removeViewButton setFrame:CGRectMake(self.bounds.origin.x+self.bounds.size.width-40, 25.0f, 32.0f, 32.0f)];
-        [removeViewButton setBackgroundColor:[UIColor clearColor]];
-        [[removeViewButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        [removeViewButton setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal];
-        [removeViewButton setSelected:NO];
-        [self addSubview:removeViewButton];
-        
-        UILabel *signupLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, scrollView.frame.size.width - 40, 30)];
+        UILabel *signupLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, self.buildScrollView.frame.size.width - 10, 300)];
         [signupLabel setTextColor:[UIColor whiteColor]];
         [signupLabel setBackgroundColor:[UIColor blackColor]];
-        [signupLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
-        signupLabel.text = @"PICK A PROFILE PICTURE";
-        signupLabel.textAlignment = NSTextAlignmentCenter;
-        [scrollView addSubview:signupLabel];
+        [self.buildScrollView addSubview:signupLabel];
         
-        UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, scrollView.frame.size.width - 40, 20)];
-        [interestLabel setTextColor:[UIColor blackColor]];
-        [interestLabel setBackgroundColor:[UIColor lightGrayColor]];
-        [interestLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
-        interestLabel.text = @"HAVE A FAVORITE SELFIE? ADD IT NOW!";
-        [scrollView addSubview:interestLabel];
         
-        profileImage = [UIImage imageNamed:@"user.png"];
-        profileImageView = [[UIImageView alloc] initWithImage:profileImage];
-        [profileImageView setFrame:CGRectMake(25, 100, 200, 200)];
-        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2.0f;
-        profileImageView.layer.masksToBounds = YES;
-        profileImageView.layer.borderWidth = 0;
+        UIImageView *productImageView = [[UIImageView alloc]init];
+        productImageView.frame = CGRectMake(15.0f, 15.0f, 80.0f, 80.0f);
+        productImageView.layer.cornerRadius = 40.0;
+        productImageView.layer.borderWidth = 1.0;
+        [productImageView setImage:[UIImage imageNamed:@"user.png"]];
+        [self.buildScrollView  addSubview:productImageView];
+        
+        removeViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [removeViewButton setFrame:CGRectMake(self.buildScrollView.frame.size.width - 60.0f, 10.0f, 50.0f, 20.0f)];
+        [removeViewButton setBackgroundColor:[UIColor blackColor]];
+        removeViewButton.titleLabel.font = [UIFont fontWithName: kFontBold size: 12.0f];
+        [removeViewButton setTitle:@"(CLOSE)" forState:UIControlStateNormal];
+        [removeViewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        //[[removeViewButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
+        //[removeViewButton setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal];
+        [removeViewButton setSelected:NO];
+        [self.buildScrollView addSubview:removeViewButton];
+        
 
-        [profileImageView setBackgroundColor:[UIColor whiteColor]];
-        [scrollView addSubview:profileImageView];
+        UILabel *productLabel = [[UILabel alloc]init];
+        productLabel.frame = CGRectMake(self.buildScrollView.frame.size.width - 200.0f, 25.0f, 190.0f, 70.0f);
+        [productLabel setTextColor:[UIColor whiteColor]];
+        [productLabel setBackgroundColor:[UIColor blackColor]];
+        [productLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
+        productLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        productLabel.numberOfLines = 0;
+        productLabel.text = @"A REGISTRY FOR ANY OCCASION\nEND THE RE-GIFTING CYCLE!";
+        productLabel.textAlignment = NSTextAlignmentRight;
+        [self.buildScrollView addSubview:productLabel];
         
-        continueButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [continueButton setFrame:CGRectMake(scrollView.frame.size.width - 80, scrollView.frame.size.height - 40, 60, 25)];
-        [continueButton setBackgroundColor:[UIColor whiteColor]];
-        [continueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [continueButton setTitle:@"CONTINUE" forState:UIControlStateNormal];
-        [continueButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
-        [continueButton setSelected:NO];
-        continueButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [scrollView addSubview:continueButton];
+        int sVWidth = self.frame.size.width;
+        self.productName.frame = CGRectMake(130.0f, 60.0f, sVWidth - 150.0f, 30.0f);
+        self.productName.backgroundColor = [UIColor whiteColor];
+        [self.productName setTextColor:[UIColor blackColor]];
+        [self.productName setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        self.productName.placeholder = @"Name of product";
+        [self.productName setBorderStyle:UITextBorderStyleNone];
+        self.productName.delegate=self;
+        self.productName.userInteractionEnabled=YES;
+        [self.buildScrollView addSubview:self.productName];
         
-        skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [skipButton setFrame:CGRectMake(20, scrollView.frame.size.height - 40, 60, 25)];
-        [skipButton setBackgroundColor:[UIColor whiteColor]];
-        [skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [skipButton setTitle:@"SKIP" forState:UIControlStateNormal];
-        [skipButton.titleLabel setFont:[UIFont fontWithName:kFontNormal size:10.0f]];
-        [skipButton setSelected:NO];
-        skipButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [scrollView addSubview:skipButton];
+        self.productURL.frame = CGRectMake(30.0f, 100.0f, sVWidth - 130.0f, 30.0f);
+        self.productURL.backgroundColor = [UIColor whiteColor];
+        [self.productURL setTextColor:[UIColor blackColor]];
+        [self.productURL setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        [self.productURL setBorderStyle:UITextBorderStyleNone];
+        self.productURL.placeholder = @"Product link (optional)";
+        self.productURL.delegate=self;
+        self.productURL.userInteractionEnabled=YES;
+        [self.buildScrollView addSubview:self.productURL];
         
-        alreadyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [alreadyButton setFrame:CGRectMake(30, scrollView.frame.size.height +80, scrollView.frame.size.width, 30.0)];
-        [alreadyButton setBackgroundColor:[UIColor blackColor]];
-        [alreadyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [alreadyButton setTitle:@"ALREADY A MIXER? LOG IN HERE." forState:UIControlStateNormal];
-        [alreadyButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
-        [alreadyButton setSelected:NO];
-        [self addSubview:alreadyButton];
+        self.productPrice.frame = CGRectMake(230, 100, 70, 30.0f);
+        self.productPrice.backgroundColor = [UIColor whiteColor];
+        [self.productPrice setTextColor:[UIColor blackColor]];
+        self.productPrice.textAlignment = NSTextAlignmentCenter;
+        [self.productPrice setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        [self.productPrice setBorderStyle:UITextBorderStyleNone];
+        self.productPrice.placeholder = @"$0.00";
+        self.productPrice.delegate=self;
+        self.productPrice.userInteractionEnabled=YES;
+        self.productPrice.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        [self.buildScrollView addSubview:self.productPrice];
+        
+        self.productDescription.frame = CGRectMake(30.0f, 140.0f, sVWidth - 50.0f, 30.0f);
+        self.productDescription.backgroundColor = [UIColor whiteColor];
+        [self.productDescription setTextColor:[UIColor blackColor]];
+        [self.productDescription setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        [self.productDescription setBorderStyle:UITextBorderStyleNone];
+        self.productDescription.placeholder = @"Product description";
+        self.productDescription.delegate=self;
+        self.productDescription.userInteractionEnabled=YES;
+        [self.buildScrollView addSubview:self.productDescription];
+        
+        self.productComplete.frame = CGRectMake(255, 185, 45, 40);
+        [self.productComplete setBackgroundColor:[UIColor whiteColor]];
+        [self.productComplete setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.productComplete setTitle:@"ADD" forState:UIControlStateNormal];
+        [self.productComplete.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [self.productComplete setSelected:NO];
+        self.productComplete.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.buildScrollView addSubview:self.productComplete];
         
     }
     

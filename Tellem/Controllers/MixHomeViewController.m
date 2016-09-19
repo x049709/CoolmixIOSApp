@@ -72,19 +72,7 @@ productDesirability,needProduct,wantProduct, loveProduct, productComplete,desira
         [tabBarController customizeTabBar:0];
     }
     
-    self.titleLabel.frame=CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 50.0f);
-    self.titleLabel.layer.cornerRadius = 0.0;
-    self.titleLabel.layer.borderWidth = 1.0;
-    self.titleLabel.layer.borderColor = [UIColor clearColor].CGColor;
-    self.titleLabel.layer.backgroundColor =[UIColor blackColor].CGColor;
-    self.titleLabel.textAlignment = NSTextAlignmentRight;
-    NSString *mixTitle = [NSString stringWithFormat:@"%@\t", @"THE MIX"];
-    self.titleLabel.text = mixTitle;
-    self.titleLabel.textColor = [UIColor whiteColor];
-    [self.titleLabel setFont:[UIFont fontWithName:kFontBold size:40.0f]];
-    [self.view addSubview:titleLabel];
-
-    self.scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 60.0f,self.view.bounds.size.width,self.view.bounds.size.height);
+    self.scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 0.0f,self.view.bounds.size.width,self.view.bounds.size.height);
     [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+250)];
     [self.view addSubview:scrollView];
    
@@ -307,19 +295,13 @@ productDesirability,needProduct,wantProduct, loveProduct, productComplete,desira
 
 
 - (void)customGiftLabelTouched:(id)sender {
-    tellemBuildCustomRegistry=[[TellemBuildCustomRegistry alloc]initWithFrame:CGRectMake(4, 0, self.view.frame.size.width-8, self.view.frame.size.height-10)];
+    tellemBuildCustomRegistry=[[TellemBuildCustomRegistry alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [tellemBuildCustomRegistry.removeViewButton addTarget:self action:@selector(removeCustomGiftView:) forControlEvents:UIControlEventTouchUpInside];
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    self.blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    blurEffectView.frame = self.view.bounds;
-    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:blurEffectView];
     [self.view addSubview:tellemBuildCustomRegistry];
 }
 
 - (void)removeCustomGiftView:(id)sender {
     [self.tellemBuildCustomRegistry removeFromSuperview];
-    [self.blurEffectView removeFromSuperview];
 }
 
 
