@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-@interface TellemBuildCustomRegistry : UIView<UITextFieldDelegate>
+@interface TellemBuildCustomRegistry : UIView<UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *buildScrollView;
 @property (nonatomic, strong) UIImageView *profileImageView;

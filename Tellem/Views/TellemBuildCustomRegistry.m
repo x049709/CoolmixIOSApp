@@ -53,12 +53,12 @@
         [self.buildScrollView addSubview:signupLabel];
         
         
-        UIImageView *productImageView = [[UIImageView alloc]init];
-        productImageView.frame = CGRectMake(15.0f, 15.0f, 80.0f, 80.0f);
-        productImageView.layer.cornerRadius = 40.0;
-        productImageView.layer.borderWidth = 1.0;
-        [productImageView setImage:[UIImage imageNamed:@"user.png"]];
-        [self.buildScrollView  addSubview:productImageView];
+        UIImageView *registryImageView = [[UIImageView alloc]init];
+        registryImageView.frame = CGRectMake(15.0f, 15.0f, 80.0f, 80.0f);
+        registryImageView.layer.cornerRadius = 40.0;
+        registryImageView.layer.borderWidth = 1.0;
+        [registryImageView setImage:[UIImage imageNamed:@"user.png"]];
+        [self.buildScrollView  addSubview:registryImageView];
         
         removeViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [removeViewButton setFrame:CGRectMake(self.buildScrollView.frame.size.width - 60.0f, 10.0f, 50.0f, 20.0f)];
@@ -66,79 +66,108 @@
         removeViewButton.titleLabel.font = [UIFont fontWithName: kFontBold size: 12.0f];
         [removeViewButton setTitle:@"(CLOSE)" forState:UIControlStateNormal];
         [removeViewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //[[removeViewButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        //[removeViewButton setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal];
         [removeViewButton setSelected:NO];
         [self.buildScrollView addSubview:removeViewButton];
-        
 
-        UILabel *productLabel = [[UILabel alloc]init];
-        productLabel.frame = CGRectMake(self.buildScrollView.frame.size.width - 200.0f, 25.0f, 190.0f, 70.0f);
-        [productLabel setTextColor:[UIColor whiteColor]];
-        [productLabel setBackgroundColor:[UIColor blackColor]];
-        [productLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
-        productLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        productLabel.numberOfLines = 0;
-        productLabel.text = @"A REGISTRY FOR ANY OCCASION\nEND THE RE-GIFTING CYCLE!";
-        productLabel.textAlignment = NSTextAlignmentRight;
-        [self.buildScrollView addSubview:productLabel];
+        UILabel *registryLabel = [[UILabel alloc]init];
+        registryLabel.frame = CGRectMake(self.buildScrollView.frame.size.width - 200.0f, 25.0f, 190.0f, 40.0f);
+        [registryLabel setTextColor:[UIColor whiteColor]];
+        [registryLabel setBackgroundColor:[UIColor blackColor]];
+        [registryLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
+        registryLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        registryLabel.numberOfLines = 0;
+        registryLabel.text = @"A REGISTRY FOR ANY OCCASION\nEND THE RE-GIFTING CYCLE!";
+        registryLabel.textAlignment = NSTextAlignmentRight;
+        [self.buildScrollView addSubview:registryLabel];
         
-        int sVWidth = self.frame.size.width;
-        self.productName.frame = CGRectMake(130.0f, 60.0f, sVWidth - 150.0f, 30.0f);
-        self.productName.backgroundColor = [UIColor whiteColor];
-        [self.productName setTextColor:[UIColor blackColor]];
-        [self.productName setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        self.productName.placeholder = @"Name of product";
-        [self.productName setBorderStyle:UITextBorderStyleNone];
-        self.productName.delegate=self;
-        self.productName.userInteractionEnabled=YES;
-        [self.buildScrollView addSubview:self.productName];
+        UITextField *registryTitle = [[UITextField alloc]init];
+        registryTitle.frame = CGRectMake(self.buildScrollView.frame.size.width - 180.0f, 70.0f, 170.0f, 30.0f);
+        registryTitle.backgroundColor = [UIColor whiteColor];
+        [registryTitle setTextColor:[UIColor blackColor]];
+        [registryTitle setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        registryTitle.placeholder = @"Title of registry";
+        [registryTitle setBorderStyle:UITextBorderStyleNone];
+        registryTitle.delegate=self;
+        registryTitle.userInteractionEnabled=YES;
+        [buildScrollView addSubview:registryTitle];
         
-        self.productURL.frame = CGRectMake(30.0f, 100.0f, sVWidth - 130.0f, 30.0f);
-        self.productURL.backgroundColor = [UIColor whiteColor];
-        [self.productURL setTextColor:[UIColor blackColor]];
-        [self.productURL setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        [self.productURL setBorderStyle:UITextBorderStyleNone];
-        self.productURL.placeholder = @"Product link (optional)";
-        self.productURL.delegate=self;
-        self.productURL.userInteractionEnabled=YES;
-        [self.buildScrollView addSubview:self.productURL];
+        UITextField *registryCountdown = [[UITextField alloc]init];
+        registryCountdown.frame = CGRectMake(self.buildScrollView.frame.size.width - 180.0f, 110.0f, 80.0f, 30.0f);
+        registryCountdown.backgroundColor = [UIColor whiteColor];
+        [registryCountdown setTextColor:[UIColor blackColor]];
+        [registryCountdown setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        registryCountdown.placeholder = @"Countdown";
+        [registryCountdown setBorderStyle:UITextBorderStyleNone];
+        registryCountdown.delegate=self;
+        registryCountdown.userInteractionEnabled=YES;
+        [buildScrollView addSubview:registryCountdown];
         
-        self.productPrice.frame = CGRectMake(230, 100, 70, 30.0f);
-        self.productPrice.backgroundColor = [UIColor whiteColor];
-        [self.productPrice setTextColor:[UIColor blackColor]];
-        self.productPrice.textAlignment = NSTextAlignmentCenter;
-        [self.productPrice setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        [self.productPrice setBorderStyle:UITextBorderStyleNone];
-        self.productPrice.placeholder = @"$0.00";
-        self.productPrice.delegate=self;
-        self.productPrice.userInteractionEnabled=YES;
-        self.productPrice.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-        [self.buildScrollView addSubview:self.productPrice];
+        UITextField *registryEndDate = [[UITextField alloc]init];
+        registryEndDate.frame = CGRectMake(self.buildScrollView.frame.size.width - 90.0f, 110.0f, 80.0f, 30.0f);
+        registryEndDate.backgroundColor = [UIColor whiteColor];
+        [registryEndDate setTextColor:[UIColor blackColor]];
+        [registryEndDate setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
+        registryEndDate.placeholder = @"mm/dd/yy";
+        [registryEndDate setBorderStyle:UITextBorderStyleNone];
+        registryEndDate.delegate=self;
+        registryEndDate.userInteractionEnabled=YES;
+        [buildScrollView addSubview:registryEndDate];
+                
+        UITextView *registryDecription = [[UITextView alloc]init];
+        registryDecription.frame = CGRectMake(15.0f, 150.0f, self.buildScrollView.frame.size.width - 25.0f, 70.0f);
+        registryDecription.layer.borderWidth = 1.0;
+        registryDecription.layer.borderColor = [[UIColor darkGrayColor]CGColor];
+        registryDecription.clearsOnInsertion = TRUE;
+        [registryDecription resignFirstResponder];
+        registryDecription.delegate = self;
+        registryDecription.backgroundColor = [UIColor whiteColor];
+        registryDecription.font = [UIFont fontWithName:kFontThin size:10.0];
+        [registryDecription setTextColor:[UIColor blackColor]];
+        [registryDecription setTintColor:[UIColor blackColor]];
+        [buildScrollView addSubview:registryDecription];
         
-        self.productDescription.frame = CGRectMake(30.0f, 140.0f, sVWidth - 50.0f, 30.0f);
-        self.productDescription.backgroundColor = [UIColor whiteColor];
-        [self.productDescription setTextColor:[UIColor blackColor]];
-        [self.productDescription setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        [self.productDescription setBorderStyle:UITextBorderStyleNone];
-        self.productDescription.placeholder = @"Product description";
-        self.productDescription.delegate=self;
-        self.productDescription.userInteractionEnabled=YES;
-        [self.buildScrollView addSubview:self.productDescription];
-        
-        self.productComplete.frame = CGRectMake(255, 185, 45, 40);
-        [self.productComplete setBackgroundColor:[UIColor whiteColor]];
-        [self.productComplete setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self.productComplete setTitle:@"ADD" forState:UIControlStateNormal];
-        [self.productComplete.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
-        [self.productComplete setSelected:NO];
-        self.productComplete.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        [self.buildScrollView addSubview:self.productComplete];
+        int buttonWidth = (self.buildScrollView.frame.size.width - 25.0f)/2 - 10.0f;
+        UIButton *addItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        addItemButton.frame = CGRectMake(15, 240, buttonWidth, 40);
+        [addItemButton setBackgroundColor:[UIColor whiteColor]];
+        [addItemButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [addItemButton setTitle:@"ADD ITEMS" forState:UIControlStateNormal];
+        [addItemButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [addItemButton setSelected:NO];
+        addItemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.buildScrollView addSubview:addItemButton];
+
+        UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareButton.frame = CGRectMake(15 + buttonWidth + 20, 240, buttonWidth, 40);
+        [shareButton setBackgroundColor:[UIColor whiteColor]];
+        [shareButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [shareButton setTitle:@"SHARE" forState:UIControlStateNormal];
+        [shareButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [shareButton setSelected:NO];
+        shareButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.buildScrollView addSubview:shareButton];
         
     }
     
     return self;
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 - (void)changeButtonColor:(id)sender {
     
