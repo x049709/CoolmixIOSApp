@@ -18,6 +18,7 @@
 #import "TNRadioButtonGroup.h"
 #import "TellemAddToRegistry.h"
 #import "TellemBuildCustomRegistry.h"
+#import "TellemUserCustomRegistry.h"
 
 @interface MixHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate>{
     
@@ -63,6 +64,7 @@
 @property (nonatomic, strong) TNCircularRadioButtonData *wantProduct;
 @property (nonatomic, strong) TNCircularRadioButtonData *loveProduct;
 @property (nonatomic, strong) TellemAddToRegistry *tellemAddToRegistry;
+@property (nonatomic, strong) TellemUserCustomRegistry *tellemUserCustomRegistry;
 @property (nonatomic, strong) TellemBuildCustomRegistry *tellemBuildCustomRegistry;
 @property UIVisualEffectView *blurEffectView;
 

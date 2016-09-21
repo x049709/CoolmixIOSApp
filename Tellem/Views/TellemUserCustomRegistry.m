@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-#import "TellemBuildCustomRegistry.h"
+#import "TellemUserCustomRegistry.h"
 
 
-@interface TellemBuildCustomRegistry ()
+@interface TellemUserCustomRegistry ()
 @end
 
 
-@implementation TellemBuildCustomRegistry
+@implementation TellemUserCustomRegistry
 @synthesize buildScrollView;
 @synthesize profileImageView, profileImageLabel;
 @synthesize profileImage;
@@ -27,7 +27,7 @@
 @synthesize entertainmentButton, lifestyleButton, techscienceButton;
 @synthesize artButton, gamingButton, foodButton;
 @synthesize fashionButton, outdoorsadventureButton;
-@synthesize quickAddLabel,registryImageView,productLabel,productDescription,productURL,productPrice,productName,productComplete, userRegistryOne;
+@synthesize quickAddLabel,productImageView,productLabel,productDescription,productURL,productPrice,productName,userRegistryOne;
 
 
 #pragma mark - Initialization
@@ -77,7 +77,7 @@
         [registryLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
         registryLabel.lineBreakMode = NSLineBreakByWordWrapping;
         registryLabel.numberOfLines = 0;
-        registryLabel.text = @"A REGISTRY FOR ANY OCCASION\nEND THE RE-GIFTING CYCLE!";
+        registryLabel.text = @"A CUSTOM REGISTRY";
         registryLabel.textAlignment = NSTextAlignmentRight;
         [self.buildScrollView addSubview:registryLabel];
         
@@ -157,12 +157,12 @@
         userRegistryLabel.textAlignment = NSTextAlignmentLeft;
         [self.buildScrollView addSubview:userRegistryLabel];
         
-        self.userRegistryOne = [[UIImageView alloc]init];
-        self.userRegistryOne.frame = CGRectMake(15.0f, 330.0f, 80.0f, 80.0f);
-        self.userRegistryOne.layer.cornerRadius = 40.0;
-        self.userRegistryOne.layer.borderWidth = 0.0;
-        [self.userRegistryOne setImage:[UIImage imageNamed:@"user.png"]];
-        [self.buildScrollView  addSubview:self.userRegistryOne];
+        UIImageView *userRegistryOne = [[UIImageView alloc]init];
+        userRegistryOne.frame = CGRectMake(15.0f, 330.0f, 80.0f, 80.0f);
+        userRegistryOne.layer.cornerRadius = 40.0;
+        userRegistryOne.layer.borderWidth = 0.0;
+        [userRegistryOne setImage:[UIImage imageNamed:@"user.png"]];
+        [self.buildScrollView  addSubview:userRegistryOne];
         
         UIImageView *userRegistryTwo = [[UIImageView alloc]init];
         userRegistryTwo.frame = CGRectMake(105.0f, 330.0f, 80.0f, 80.0f);

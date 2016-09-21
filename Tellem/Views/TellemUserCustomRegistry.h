@@ -1,12 +1,12 @@
 //
-// TellemBuildCustomRegistry.h
+// TellemUserCustomRegistry.h
 //  Tellem
 //
 //  Created by Ed Bayudan on 1/28/15.
 //  Copyright (c) 2015 Tellem, LLC All rights reserved.
 //
 
-@interface TellemBuildCustomRegistry : UIView<UITextFieldDelegate, UITextViewDelegate>
+@interface TellemUserCustomRegistry : UIView<UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *buildScrollView;
 @property (nonatomic, strong) UIImageView *profileImageView;
@@ -24,15 +24,14 @@
 @property (nonatomic, strong) UIButton *artButton, *gamingButton,*foodButton;
 @property (nonatomic, strong) UIButton *fashionButton, *outdoorsadventureButton;
 @property (weak, nonatomic) IBOutlet UILabel *quickAddLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *registryImageView;
-@property UIImageView *userRegistryOne;
+@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (weak, nonatomic) IBOutlet UILabel *productLabel;
 @property (weak, nonatomic) IBOutlet UITextField *productDescription;
 @property (weak, nonatomic) IBOutlet UITextField *productURL;
 @property (weak, nonatomic) IBOutlet UITextField *productPrice;
 @property (weak, nonatomic) IBOutlet UITextField *productName;
 @property (weak, nonatomic) IBOutlet UILabel *productDesirability;
-@property (weak, nonatomic) IBOutlet UIButton *productComplete;
+@property UIImageView *userRegistryOne;
 
 
 

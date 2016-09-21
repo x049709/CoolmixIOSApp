@@ -39,7 +39,7 @@
 @synthesize sortedCircleNames,circleUserIds,sortedUserActivities,circleTableView,titleText, titleLabel,pageCircle,pushPayload,scrollView;
 @synthesize activityImageView,activityUserId,activityInitialComment,circleAvatar,netWorkTable;
 @synthesize posterNameLabel,postTimestampLabel,postLatestCommentsLabel,timeIntervalFormatter,pageIndex, tM;
-@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree,tellemAddToRegistry,tellemBuildCustomRegistry;
+@synthesize quickAddLabel, customGiftLabel, giftSuggestLabel, groceryXChngLabel, customLabelOne, customLabelTwo, customLabelThree,tellemAddToRegistry,tellemBuildCustomRegistry,tellemUserCustomRegistry;
 @synthesize productImageView,productLabel,productDescription,productURL,productPrice,productName,
 productDesirability,needProduct,wantProduct, loveProduct, productComplete,desirabilityGroup,blurEffectView;
 
@@ -74,6 +74,7 @@ productDesirability,needProduct,wantProduct, loveProduct, productComplete,desira
     
     self.scrollView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 0.0f,self.view.bounds.size.width,self.view.bounds.size.height);
     [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+250)];
+    [scrollView setShowsVerticalScrollIndicator:NO];
     [self.view addSubview:scrollView];
    
     self.quickAddLabel.frame = CGRectMake(15.0f, 10.0f, self.view.frame.size.width - 30.0f, 230.0f);
@@ -289,19 +290,48 @@ productDesirability,needProduct,wantProduct, loveProduct, productComplete,desira
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [tellemAddToRegistry removeFromSuperview];
-    [tellemBuildCustomRegistry removeFromSuperview];
+    [self.tellemAddToRegistry removeFromSuperview];
+    [self.tellemBuildCustomRegistry removeFromSuperview];
+    [self.tellemUserCustomRegistry removeFromSuperview];
+
 }
 
 
 - (void)customGiftLabelTouched:(id)sender {
     tellemBuildCustomRegistry=[[TellemBuildCustomRegistry alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [tellemBuildCustomRegistry.removeViewButton addTarget:self action:@selector(removeCustomGiftView:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *customRegistryTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customRegistryImageTouched)];
+    customRegistryTouch.numberOfTapsRequired = 1;
+    [tellemBuildCustomRegistry.userRegistryOne setUserInteractionEnabled:YES];
+    [tellemBuildCustomRegistry.userRegistryOne addGestureRecognizer:customRegistryTouch];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
+    [ApplicationDelegate.hudd show:YES];
+    [self.view addSubview:tellemBuildCustomRegistry];
+    [ApplicationDelegate.hudd hide:YES];
     [self.view addSubview:tellemBuildCustomRegistry];
 }
 
 - (void)removeCustomGiftView:(id)sender {
     [self.tellemBuildCustomRegistry removeFromSuperview];
+}
+
+- (void)customRegistryImageTouched {
+    tellemUserCustomRegistry=[[TellemUserCustomRegistry alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [tellemUserCustomRegistry.removeViewButton addTarget:self action:@selector(removeUserRegistryView:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *customRegistryTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customRegistryImageTouched)];
+    customRegistryTouch.numberOfTapsRequired = 1;
+    [tellemUserCustomRegistry.userRegistryOne setUserInteractionEnabled:YES];
+    [tellemUserCustomRegistry.userRegistryOne addGestureRecognizer:customRegistryTouch];
+    [self.view.window addSubview:ApplicationDelegate.hudd];
+    [ApplicationDelegate.hudd show:YES];
+    [self.view addSubview:tellemUserCustomRegistry];
+    [ApplicationDelegate.hudd hide:YES];
+    [self.view addSubview:tellemUserCustomRegistry];
+}
+
+- (void)removeUserRegistryView:(id)sender {
+    [self.tellemBuildCustomRegistry removeFromSuperview];
+    [self.tellemUserCustomRegistry removeFromSuperview];
 }
 
 
