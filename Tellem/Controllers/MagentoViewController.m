@@ -50,7 +50,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSString *urlString = @"http://coolmix.nyc/index.php";
+    NSString *urlString = @"http://coolmix.com";
+    //NSString *urlString = @"http://coolmix.nyc/index.php";
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url];
     

@@ -49,8 +49,8 @@
         [self addSubview:self.buildScrollView];
         
         UILabel *signupLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, self.buildScrollView.frame.size.width - 10, 300)];
-        [signupLabel setTextColor:[UIColor whiteColor]];
-        [signupLabel setBackgroundColor:[UIColor blackColor]];
+        [signupLabel setTextColor:[UIColor blackColor]];
+        [signupLabel setBackgroundColor:[UIColor whiteColor]];
         [self.buildScrollView addSubview:signupLabel];
         
         
@@ -63,106 +63,82 @@
         
         removeViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [removeViewButton setFrame:CGRectMake(self.buildScrollView.frame.size.width - 60.0f, 10.0f, 50.0f, 20.0f)];
-        [removeViewButton setBackgroundColor:[UIColor blackColor]];
+        [removeViewButton setBackgroundColor:[UIColor whiteColor]];
         removeViewButton.titleLabel.font = [UIFont fontWithName: kFontBold size: 12.0f];
         [removeViewButton setTitle:@"(CLOSE)" forState:UIControlStateNormal];
-        [removeViewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [removeViewButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [removeViewButton setSelected:NO];
         [self.buildScrollView addSubview:removeViewButton];
 
         UILabel *registryLabel = [[UILabel alloc]init];
-        registryLabel.frame = CGRectMake(self.buildScrollView.frame.size.width - 200.0f, 25.0f, 185.0f, 40.0f);
-        [registryLabel setTextColor:[UIColor whiteColor]];
-        [registryLabel setBackgroundColor:[UIColor blackColor]];
-        [registryLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
+        registryLabel.frame = CGRectMake(self.buildScrollView.frame.size.width - 200.0f, 30.0f, 185.0f, 40.0f);
+        [registryLabel setTextColor:[UIColor blackColor]];
+        [registryLabel setBackgroundColor:[UIColor whiteColor]];
+        [registryLabel setFont:[UIFont fontWithName: kFontBold size: 14.0f]];
         registryLabel.lineBreakMode = NSLineBreakByWordWrapping;
         registryLabel.numberOfLines = 0;
-        registryLabel.text = @"A CUSTOM REGISTRY";
+        registryLabel.text = @"JOE & JANES's WEDDING REGISTRY";
         registryLabel.textAlignment = NSTextAlignmentRight;
         [self.buildScrollView addSubview:registryLabel];
         
-        UITextField *registryTitle = [[UITextField alloc]init];
-        registryTitle.frame = CGRectMake(self.buildScrollView.frame.size.width - 180.0f, 70.0f, 165.0f, 30.0f);
-        registryTitle.backgroundColor = [UIColor whiteColor];
-        [registryTitle setTextColor:[UIColor blackColor]];
-        [registryTitle setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        registryTitle.placeholder = @"Title of registry";
-        [registryTitle setBorderStyle:UITextBorderStyleNone];
-        registryTitle.delegate=self;
-        registryTitle.userInteractionEnabled=YES;
-        [buildScrollView addSubview:registryTitle];
-        
-        UITextField *registryCountdown = [[UITextField alloc]init];
-        registryCountdown.frame = CGRectMake(self.buildScrollView.frame.size.width - 180.0f, 110.0f, 80.0f, 30.0f);
-        registryCountdown.backgroundColor = [UIColor whiteColor];
-        [registryCountdown setTextColor:[UIColor blackColor]];
-        [registryCountdown setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        registryCountdown.placeholder = @"Countdown";
-        [registryCountdown setBorderStyle:UITextBorderStyleNone];
-        registryCountdown.delegate=self;
-        registryCountdown.userInteractionEnabled=YES;
-        [buildScrollView addSubview:registryCountdown];
-        
-        UITextField *registryEndDate = [[UITextField alloc]init];
-        registryEndDate.frame = CGRectMake(self.buildScrollView.frame.size.width - 90.0f, 110.0f, 75.0f, 30.0f);
-        registryEndDate.backgroundColor = [UIColor whiteColor];
-        [registryEndDate setTextColor:[UIColor blackColor]];
-        [registryEndDate setFont:[UIFont fontWithName:kFontNormal size:14.0f]];
-        registryEndDate.placeholder = @"mm/dd/yy";
-        [registryEndDate setBorderStyle:UITextBorderStyleNone];
-        registryEndDate.delegate=self;
-        registryEndDate.userInteractionEnabled=YES;
-        [buildScrollView addSubview:registryEndDate];
-                
-        UITextView *registryDecription = [[UITextView alloc]init];
-        registryDecription.frame = CGRectMake(15.0f, 150.0f, self.buildScrollView.frame.size.width - 30.0f, 70.0f);
-        registryDecription.layer.borderWidth = 1.0;
-        registryDecription.layer.borderColor = [[UIColor darkGrayColor]CGColor];
-        registryDecription.clearsOnInsertion = TRUE;
-        [registryDecription resignFirstResponder];
-        registryDecription.delegate = self;
-        registryDecription.backgroundColor = [UIColor whiteColor];
-        registryDecription.font = [UIFont fontWithName:kFontThin size:10.0];
-        [registryDecription setTextColor:[UIColor blackColor]];
-        [registryDecription setTintColor:[UIColor blackColor]];
-        [buildScrollView addSubview:registryDecription];
-        
         int buttonWidth = (self.buildScrollView.frame.size.width - 25.0f)/2 - 10.0f;
-        UIButton *addItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        addItemButton.frame = CGRectMake(15, 240, buttonWidth, 40);
-        [addItemButton setBackgroundColor:[UIColor whiteColor]];
-        [addItemButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [addItemButton setTitle:@"ADD ITEMS" forState:UIControlStateNormal];
-        [addItemButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
-        [addItemButton setSelected:NO];
-        addItemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        [self.buildScrollView addSubview:addItemButton];
-
-        UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareButton.frame = CGRectMake(15 + buttonWidth + 20, 240, buttonWidth -5, 40);
-        [shareButton setBackgroundColor:[UIColor whiteColor]];
-        [shareButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [shareButton setTitle:@"SHARE" forState:UIControlStateNormal];
-        [shareButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
-        [shareButton setSelected:NO];
-        shareButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        [self.buildScrollView addSubview:shareButton];
+        UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        pushButton.frame = CGRectMake(15 + buttonWidth + 20, 80, buttonWidth -5, 40);
+        [pushButton setBackgroundColor:[UIColor blackColor]];
+        [pushButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [pushButton setTitle:@"PUSH" forState:UIControlStateNormal];
+        [pushButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [pushButton setSelected:NO];
+        pushButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.buildScrollView addSubview:pushButton];
         
-        UILabel *userRegistryLabel = [[UILabel alloc]init];
-        userRegistryLabel.frame = CGRectMake(5.0f, 310.0f, 190.0f, 20.0f);
-        [userRegistryLabel setTextColor:[UIColor blackColor]];
-        [userRegistryLabel setBackgroundColor:[UIColor whiteColor]];
-        [userRegistryLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
-        userRegistryLabel.text = @"YOUR REGISTRIES:";
-        userRegistryLabel.textAlignment = NSTextAlignmentLeft;
-        [self.buildScrollView addSubview:userRegistryLabel];
+        UIButton *daysLeftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        daysLeftButton.frame = CGRectMake(15 + buttonWidth + 20, 130, buttonWidth - 5, 40);
+        [daysLeftButton setBackgroundColor:[UIColor blackColor]];
+        [daysLeftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [daysLeftButton setTitle:@"183 DAYS LEFT!" forState:UIControlStateNormal];
+        [daysLeftButton.titleLabel setFont:[UIFont fontWithName:kFontBold size:14.0f]];
+        [daysLeftButton setSelected:NO];
+        daysLeftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.buildScrollView addSubview:daysLeftButton];
         
-        UIImageView *userRegistryOne = [[UIImageView alloc]init];
-        userRegistryOne.frame = CGRectMake(15.0f, 330.0f, 80.0f, 80.0f);
-        userRegistryOne.layer.cornerRadius = 40.0;
-        userRegistryOne.layer.borderWidth = 0.0;
-        [userRegistryOne setImage:[UIImage imageNamed:@"user.png"]];
-        [self.buildScrollView  addSubview:userRegistryOne];
+        UILabel *descriptionLabel = [[UILabel alloc]init];
+        descriptionLabel.frame = CGRectMake(15.0f, 180.0f, 190.0f, 20.0f);
+        [descriptionLabel setTextColor:[UIColor blackColor]];
+        [descriptionLabel setBackgroundColor:[UIColor whiteColor]];
+        [descriptionLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
+        descriptionLabel.text = @"EVENT DESCRIPTION:";
+        descriptionLabel.textAlignment = NSTextAlignmentLeft;
+        [self.buildScrollView addSubview:descriptionLabel];
+        
+        UITextView *registryDescription = [[UITextView alloc]init];
+        registryDescription.frame = CGRectMake(15.0f, 200.0f, self.buildScrollView.frame.size.width - 30.0f, 90.0f);
+        registryDescription.layer.borderWidth = 1.0;
+        registryDescription.layer.borderColor = [[UIColor blackColor]CGColor];
+        registryDescription.clearsOnInsertion = TRUE;
+        [registryDescription resignFirstResponder];
+        registryDescription.delegate = self;
+        registryDescription.backgroundColor = [UIColor whiteColor];
+        registryDescription.font = [UIFont fontWithName:kFontThin size:10.0];
+        [registryDescription setTextColor:[UIColor blackColor]];
+        [registryDescription setTintColor:[UIColor blackColor]];
+        [buildScrollView addSubview:registryDescription];
+        
+        UILabel *giftOptionsLabel = [[UILabel alloc]init];
+        giftOptionsLabel.frame = CGRectMake(15.0f, 310.0f, 190.0f, 20.0f);
+        [giftOptionsLabel setTextColor:[UIColor blackColor]];
+        [giftOptionsLabel setBackgroundColor:[UIColor whiteColor]];
+        [giftOptionsLabel setFont:[UIFont fontWithName: kFontBold size: 12.0f]];
+        giftOptionsLabel.text = @"GIFT OPTIONS:";
+        giftOptionsLabel.textAlignment = NSTextAlignmentLeft;
+        [self.buildScrollView addSubview:giftOptionsLabel];
+        
+        UIImageView *giftOne = [[UIImageView alloc]init];
+        giftOne.frame = CGRectMake(15.0f, 330.0f, 80.0f, 80.0f);
+        giftOne.layer.cornerRadius = 40.0;
+        giftOne.layer.borderWidth = 0.0;
+        [giftOne setImage:[UIImage imageNamed:@"shareApp.png"]];
+        [self.buildScrollView  addSubview:giftOne];
         
         UIImageView *userRegistryTwo = [[UIImageView alloc]init];
         userRegistryTwo.frame = CGRectMake(105.0f, 330.0f, 80.0f, 80.0f);
